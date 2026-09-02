@@ -1755,76 +1755,67 @@ button{
 
 <script>
 function trackOrder(){
-    const id=document.getElementById("orderId").value;
-    const result=document.getElementById("result");
+    const id = document.getElementById("orderId").value.trim();
+    const result = document.getElementById("result");
 
     if(!id){
-        result.innerHTML="<p>Please enter your Order ID.</p>";
+        result.innerHTML = "<p>Please enter your Order ID.</p>";
         return;
     }
 
-    result.innerHTML="<p>Loading...</p>";
+    result.innerHTML = "<p>⏳ Loading order...</p>";
 
-    fetch("/api/order/"+id)
-    .then(r=>r.json())
-    .then(data=>{
+    fetch("/api/order/" + id)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
         if(!data.success){
-            result.innerHTML="<p>"+data.message+"</p>";
+            result.innerHTML = "<p>❌ " + (data.message || "Order not found.") + "</p>";
             return;
         }
 
-        result.innerHTML=`
-            <div style="background:#111;padding:15px;border-radius:12px">
-                <h3>Order #${data.order.id}</h3>
-                <p>Customer: ${data.order.name}</p>
-                <p>Total: ₹${data.order.total}</p>
-                <div class="status">
-                    Status: ${data.order.status}
-                </div>
+        const order = data.order;
 
-                <div style="margin-top:12px;padding:12px;background:#222;border-radius:10px">
-                    ${
-                        data.order.status==="Pending" ? "⏳ Your order is waiting for confirmation." :
-                        data.order.status==="Confirmed" ? "✅ Your order has been confirmed." :
-                        data.order.status==="Shipped" ? "🚚 Your order is on the way." :
-                        data.order.status==="Delivered" ? "🎉 Your order has been delivered." :
-                        "Order status updated."
-                    }
-                </div>
+        let message = "Order status updated.";
+        if(order.status === "Pending"){
+            message = "⏳ Your order is waiting for confirmation.";
+        }else if(order.status === "Confirmed"){
+            message = "✅ Your order has been confirmed.";
+        }else if(order.status === "Shipped"){
+            message = "🚚 Your order is on the way.";
+        }else if(order.status === "Delivered"){
+            message = "🎉 Your order has been delivered.";
+        }else if(order.status === "Cancelled"){
+            message = "❌ This order has been cancelled.";
+        }
 
-                <div style="margin-top:20px">
-                    ${data.order.status==="Cancelled" ? `
-                    <div style="padding:15px;background:#3a1717;border-radius:12px;font-weight:bold">
-                        ❌ This order has been cancelled.
-                    </div>
-                    ` : ["Pending","Confirmed","Shipped","Delivered"].map((st,i)=>{
-                        const current=["Pending","Confirmed","Shipped","Delivered"].indexOf(data.order.status);
-                        const done=i<=current;
-                        return `
-                        <div style="display:flex;align-items:center;gap:12px;margin:12px 0">
-                            <div style="width:18px;height:18px;border-radius:50%;background:${done ? "#25d366" : "#555"}"></div>
-                            <b>${st}</b>
-                        </div>`;
-                    }).join("")}
-                    `}
-                </div>
-            </div>
-        `;
+        result.innerHTML =
+            "<div style='background:#111;padding:15px;border-radius:12px'>" +
+            "<h3>Order #" + order.id + "</h3>" +
+            "<p>Customer: " + order.name + "</p>" +
+            "<p>Total: ₹" + order.total + "</p>" +
+            "<div class='status'>Status: " + order.status + "</div>" +
+            "<div style='margin-top:12px;padding:12px;background:#222;border-radius:10px'>" +
+            message +
+            "</div>" +
+            "</div>";
     })
-    .catch(()=>{
-        result.innerHTML="<p>Unable to track order.</p>";
+    .catch(function(){
+        result.innerHTML = "<p>❌ Unable to track order.</p>";
     });
 }
-document.addEventListener("DOMContentLoaded",function(){
-    const urlOrderId=new URLSearchParams(window.location.search).get("order");
+
+document.addEventListener("DOMContentLoaded", function(){
+    const urlOrderId = new URLSearchParams(window.location.search).get("order");
+
     if(urlOrderId){
-        document.getElementById("orderId").value=urlOrderId;
+        document.getElementById("orderId").value = urlOrderId;
         setTimeout(function(){
             trackOrder();
-        },300);
+        }, 300);
     }
 });
-
 </script>
 
 </body>
