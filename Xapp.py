@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, render_template_string, request, session
+import os
 import sqlite3
 
 app = Flask(__name__)
@@ -2280,7 +2281,7 @@ def admin_logout():
 
 @app.route("/admin/login",methods=["POST"])
 def admin_login():
-    if request.form.get("password")=="NovaLex@123":
+    if request.form.get("password")==os.environ.get("NOVALEX_ADMIN_PASSWORD",""):
         session["admin"]=True
         return "Login successful. <a href='/admin'>Open Admin Panel</a>"
     return "Wrong password. <a href='/admin'>Try again</a>"
