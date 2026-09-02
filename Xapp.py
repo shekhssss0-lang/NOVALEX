@@ -1815,11 +1815,15 @@ function trackOrder(){
         result.innerHTML="<p>Unable to track order.</p>";
     });
 }
-const urlOrderId=new URLSearchParams(window.location.search).get("order");
-if(urlOrderId){
-    document.getElementById("orderId").value=urlOrderId;
-    setTimeout(trackOrder,100);
-}
+document.addEventListener("DOMContentLoaded",function(){
+    const urlOrderId=new URLSearchParams(window.location.search).get("order");
+    if(urlOrderId){
+        document.getElementById("orderId").value=urlOrderId;
+        setTimeout(function(){
+            trackOrder();
+        },300);
+    }
+});
 
 </script>
 
