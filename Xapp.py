@@ -1818,7 +1818,7 @@ function trackOrder(){
 const urlOrderId=new URLSearchParams(window.location.search).get("order");
 if(urlOrderId){
     document.getElementById("orderId").value=urlOrderId;
-    trackOrder();
+    setTimeout(trackOrder,100);
 }
 
 </script>
