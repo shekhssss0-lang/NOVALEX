@@ -14,10 +14,38 @@ PRODUCTS = [
 
 ORDERS = []
 
+class DBWrapper:
+    def __init__(self, con, postgres=False):
+        self.con = con
+        self.postgres = postgres
+
+    def execute(self, query, params=()):
+        if self.postgres:
+            query = query.replace("INTEGER PRIMARY KEY AUTOINCREMENT", "SERIAL PRIMARY KEY")
+            query = query.replace("?", "%s")
+        return self.con.cursor().execute(query, params)
+
+    def commit(self):
+        self.con.commit()
+
+    def close(self):
+        self.con.close()
+
+
 def db():
+    database_url = os.environ.get("DATABASE_URL")
+
+    if database_url:
+        import psycopg2
+        from psycopg2.extras import DictCursor
+
+        con = psycopg2.connect(database_url)
+        return DBWrapper(con, postgres=True)
+
     con = sqlite3.connect("novalex.db")
     con.row_factory = sqlite3.Row
-    return con
+    return DBWrapper(con)
+
 
 def init_db():
     con = db()
