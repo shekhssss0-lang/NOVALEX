@@ -49,51 +49,95 @@ def db():
 
 def init_db():
     con = db()
-    con.execute("""
-        CREATE TABLE IF NOT EXISTS orders (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            phone TEXT,
-            address TEXT,
-            payment TEXT,
-            items TEXT,
-            total INTEGER,
-            status TEXT DEFAULT 'Pending'
-        )
-    """)
 
-    try:
-        con.execute("ALTER TABLE orders ADD COLUMN status TEXT DEFAULT 'Pending'")
-    except sqlite3.OperationalError:
-        pass
+    if con.postgres:
+        con.execute("""
+            CREATE TABLE IF NOT EXISTS orders (
+                id SERIAL PRIMARY KEY,
+                name TEXT,
+                phone TEXT,
+                address TEXT,
+                payment TEXT,
+                items TEXT,
+                total INTEGER,
+                status TEXT DEFAULT 'Pending'
+            )
+        """)
 
-    con.execute("""
-        CREATE TABLE IF NOT EXISTS products (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            price INTEGER,
-            category TEXT,
-            image TEXT,
-            icon TEXT
-        )
-    """)
+        con.execute("""
+            CREATE TABLE IF NOT EXISTS products (
+                id SERIAL PRIMARY KEY,
+                name TEXT,
+                price INTEGER,
+                category TEXT,
+                image TEXT,
+                icon TEXT
+            )
+        """)
 
-    con.execute("""
-        CREATE TABLE IF NOT EXISTS wishlist (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            phone TEXT,
-            product_id INTEGER
-        )
-    """)
+        con.execute("""
+            CREATE TABLE IF NOT EXISTS wishlist (
+                id SERIAL PRIMARY KEY,
+                phone TEXT,
+                product_id INTEGER
+            )
+        """)
 
-    con.execute("""
-        CREATE TABLE IF NOT EXISTS customers (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            phone TEXT UNIQUE,
-            address TEXT
-        )
-    """)
+        con.execute("""
+            CREATE TABLE IF NOT EXISTS customers (
+                id SERIAL PRIMARY KEY,
+                name TEXT,
+                phone TEXT UNIQUE,
+                address TEXT
+            )
+        """)
+
+    else:
+        con.execute("""
+            CREATE TABLE IF NOT EXISTS orders (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                phone TEXT,
+                address TEXT,
+                payment TEXT,
+                items TEXT,
+                total INTEGER,
+                status TEXT DEFAULT 'Pending'
+            )
+        """)
+
+        try:
+            con.execute("ALTER TABLE orders ADD COLUMN status TEXT DEFAULT 'Pending'")
+        except sqlite3.OperationalError:
+            pass
+
+        con.execute("""
+            CREATE TABLE IF NOT EXISTS products (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                price INTEGER,
+                category TEXT,
+                image TEXT,
+                icon TEXT
+            )
+        """)
+
+        con.execute("""
+            CREATE TABLE IF NOT EXISTS wishlist (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                phone TEXT,
+                product_id INTEGER
+            )
+        """)
+
+        con.execute("""
+            CREATE TABLE IF NOT EXISTS customers (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                phone TEXT UNIQUE,
+                address TEXT
+            )
+        """)
 
     count = con.execute("SELECT COUNT(*) FROM products").fetchone()[0]
 
