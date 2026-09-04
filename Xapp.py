@@ -20,10 +20,12 @@ class DBWrapper:
         self.postgres = postgres
 
     def execute(self, query, params=()):
+        cursor = self.con.cursor()
         if self.postgres:
             query = query.replace("INTEGER PRIMARY KEY AUTOINCREMENT", "SERIAL PRIMARY KEY")
             query = query.replace("?", "%s")
-        return self.con.cursor().execute(query, params)
+        cursor.execute(query, params)
+        return cursor
 
     def commit(self):
         self.con.commit()
