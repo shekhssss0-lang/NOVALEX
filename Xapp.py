@@ -142,7 +142,14 @@ def init_db():
     count = con.execute("SELECT COUNT(*) FROM products").fetchone()[0]
 
     if count == 0:
-        for product in PRODUCTS:
+        default_products = [
+            {"name":"NovaLex Classic Tee","price":799,"category":"T-Shirts","image":"/static/images/tshirt.jpg","icon":"👕"},
+            {"name":"NovaLex Oversized Tee","price":999,"category":"T-Shirts","image":"/static/images/tshirt.jpg","icon":"👕"},
+            {"name":"NovaLex Premium Hoodie","price":1499,"category":"Hoodies","image":"/static/images/hoodie.jpg","icon":"🧥"},
+            {"name":"NovaLex Street Cap","price":499,"category":"Caps","image":"/static/images/cap.jpg","icon":"🧢"}
+        ]
+
+        for product in default_products:
             con.execute("""
                 INSERT INTO products(name,price,category,image,icon)
                 VALUES(?,?,?,?,?)
