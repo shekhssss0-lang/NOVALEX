@@ -170,8 +170,13 @@ init_db()
 
 def load_products():
     con = db()
-    rows = con.execute("SELECT * FROM products ORDER BY id").fetchall()
+    cursor = con.execute("SELECT * FROM products ORDER BY id")
+    rows = cursor.fetchall()
     con.close()
+
+    if con.postgres:
+        columns = [desc[0] for desc in cursor.description]
+        return [dict(zip(columns, row)) for row in rows]
 
     return [dict(row) for row in rows]
 
