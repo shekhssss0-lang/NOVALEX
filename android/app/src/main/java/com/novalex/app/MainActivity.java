@@ -9,6 +9,15 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.view.Gravity;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,36 +36,65 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-        );
+        LinearLayout splash = new LinearLayout(this);
+        splash.setOrientation(LinearLayout.VERTICAL);
+        splash.setGravity(Gravity.CENTER);
+        splash.setBackgroundColor(Color.BLACK);
+        splash.setPadding(48, 48, 48, 48);
 
-        setContentView(R.layout.activity_main);
+        ImageView logo = new ImageView(this);
+        logo.setImageResource(com.novalex.app.R.drawable.novalex_logo);
+        logo.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
-        webView = findViewById(R.id.webview);
-        splash = findViewById(R.id.splash);
+        LinearLayout.LayoutParams logoParams =
+                new LinearLayout.LayoutParams(260, 260);
+        splash.addView(logo, logoParams);
 
-        setupNotifications();
-        setupWebView();
+        TextView brand = new TextView(this);
+        brand.setText("NOVALEX");
+        brand.setTextColor(Color.WHITE);
+        brand.setTextSize(28);
+        brand.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        brand.setGravity(Gravity.CENTER);
+        splash.addView(brand);
 
-        // Premium splash duration
+        TextView sub = new TextView(this);
+        sub.setText("PREMIUM CLOTHING");
+        sub.setTextColor(Color.rgb(217,168,63));
+        sub.setTextSize(12);
+        sub.setLetterSpacing(0.25f);
+        sub.setGravity(Gravity.CENTER);
+        splash.addView(sub);
+
+        TextView loading = new TextView(this);
+        loading.setText("Loading your style...");
+        loading.setTextColor(Color.LTGRAY);
+        loading.setTextSize(12);
+        loading.setGravity(Gravity.CENTER);
+        LinearLayout.LayoutParams loadParams =
+                new LinearLayout.LayoutParams(-1, -2);
+        loadParams.topMargin = 36;
+        splash.addView(loading, loadParams);
+
+        setContentView(splash);
+
+        AlphaAnimation fade = new AlphaAnimation(0.0f, 1.0f);
+        fade.setDuration(900);
+        logo.startAnimation(fade);
+        brand.startAnimation(fade);
+        sub.startAnimation(fade);
+
         new Handler().postDelayed(() -> {
-            splash.animate()
-                    .alpha(0f)
-                    .setDuration(350)
-                    .withEndAction(() -> {
-                        splash.setVisibility(View.GONE);
-                        webView.setAlpha(0f);
-                        webView.setVisibility(View.VISIBLE);
-                        webView.animate().alpha(1f).setDuration(450).start();
-                    })
-                    .start();
-        }, 1800);
-
-        // New-drop notification after app enters storefront
-        new Handler().postDelayed(this::showNewDropNotification, 4500);
+            setContentView(R.layout.activity_main);
+            android.webkit.WebView webView = findViewById(R.id.webview);
+            webView.setBackgroundColor(android.graphics.Color.BLACK);
+            webView.setOverScrollMode(android.view.View.OVER_SCROLL_NEVER);
+            webView.setVerticalScrollBarEnabled(false);
+            webView.setHorizontalScrollBarEnabled(false);
+            if (webView != null) {
+                webView.loadUrl("file:///android_asset/index.html");
+            }
+        }, 2400);
     }
 
     private void setupWebView() {
