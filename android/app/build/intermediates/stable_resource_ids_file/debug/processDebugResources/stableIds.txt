@@ -1,8 +1,0 @@
-com.novalex.app:style/AppTheme = 0x7f040000
-com.novalex.app:layout/activity_main = 0x7f030000
-com.novalex.app:id/webview = 0x7f020003
-com.novalex.app:id/root = 0x7f020001
-com.novalex.app:id/splash = 0x7f020002
-com.novalex.app:drawable/novalex_logo = 0x7f010001
-com.novalex.app:id/logo = 0x7f020000
-com.novalex.app:drawable/ic_novalex = 0x7f010000
