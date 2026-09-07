@@ -1,0 +1,53 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.novalex.app"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+9        android:targetSdkVersion="35" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:4:5-67
+11-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:4:22-64
+12    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+12-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:5:5-77
+12-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:5:22-74
+13
+14    <application
+14-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:7:5-26:19
+15        android:allowBackup="true"
+15-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:8:9-35
+16        android:debuggable="true"
+17        android:extractNativeLibs="false"
+18        android:icon="@drawable/ic_novalex"
+18-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:9:9-44
+19        android:label="NovaLex"
+19-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:10:9-32
+20        android:theme="@style/AppTheme"
+20-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:11:9-40
+21        android:usesCleartextTraffic="true" >
+21-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:12:9-44
+22        <activity
+22-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:14:9-24:20
+23            android:name="com.novalex.app.MainActivity"
+23-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:15:13-41
+24            android:exported="true"
+24-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:17:13-36
+25            android:screenOrientation="portrait" >
+25-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:16:13-49
+26            <intent-filter>
+26-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:19:13-22:29
+27                <action android:name="android.intent.action.MAIN" />
+27-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:20:17-69
+27-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:20:25-66
+28
+29                <category android:name="android.intent.category.LAUNCHER" />
+29-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:21:17-77
+29-->/data/data/com.termux/files/home/NOVALEX/android/app/src/main/AndroidManifest.xml:21:27-74
+30            </intent-filter>
+31        </activity>
+32    </application>
+33
+34</manifest>

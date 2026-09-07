@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#050505">
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:background="#050505">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="190dp"
+            android:layout_height="190dp"
+            android:src="@drawable/novalex_logo"
+            android:scaleType="fitCenter"
+            android:contentDescription="NovaLex Logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="NOV ALEX"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.22" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="DEFINE YOUR STYLE"
+            android:textColor="#D4AF37"
+            android:textSize="11sp"
+            android:letterSpacing="0.25" />
+
+        <ProgressBar
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="38dp"
+            android:indeterminate="true" />
+
+    </LinearLayout>
+
+</FrameLayout>

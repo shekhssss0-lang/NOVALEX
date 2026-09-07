@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.novalex.app-debug-4:/layout_activity_main.xml.flat",
+        "source": "com.novalex.app-main-6:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.novalex.app-debug-4:/drawable_ic_novalex.xml.flat",
+        "source": "com.novalex.app-main-6:/drawable/ic_novalex.xml"
+    },
+    {
+        "merged": "com.novalex.app-debug-4:/drawable-nodpi_novalex_logo.png.flat",
+        "source": "com.novalex.app-main-6:/drawable-nodpi/novalex_logo.png"
+    }
+]

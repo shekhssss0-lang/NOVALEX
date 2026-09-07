@@ -1,0 +1,10 @@
+R_DEF: Internal format may change without notice
+local
+drawable ic_novalex
+drawable novalex_logo
+id logo
+id root
+id splash
+id webview
+layout activity_main
+style AppTheme

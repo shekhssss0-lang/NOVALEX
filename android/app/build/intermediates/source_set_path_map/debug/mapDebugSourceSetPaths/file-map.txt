@@ -1,0 +1,7 @@
+com.novalex.app-pngs-0 /data/data/com.termux/files/home/NOVALEX/android/app/build/generated/res/pngs/debug
+com.novalex.app-resValues-1 /data/data/com.termux/files/home/NOVALEX/android/app/build/generated/res/resValues/debug
+com.novalex.app-packageDebugResources-2 /data/data/com.termux/files/home/NOVALEX/android/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.novalex.app-packageDebugResources-3 /data/data/com.termux/files/home/NOVALEX/android/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.novalex.app-debug-4 /data/data/com.termux/files/home/NOVALEX/android/app/build/intermediates/merged_res/debug/mergeDebugResources
+com.novalex.app-debug-5 /data/data/com.termux/files/home/NOVALEX/android/app/src/debug/res
+com.novalex.app-main-6 /data/data/com.termux/files/home/NOVALEX/android/app/src/main/res

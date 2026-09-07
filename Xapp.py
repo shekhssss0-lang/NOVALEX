@@ -204,12 +204,12 @@ header{background:#111;color:#fff;padding:16px 5%;display:flex;justify-content:s
 .categoryBtn:hover{background:#111;color:#fff}
 .search{width:100%;padding:15px;border:1px solid #ddd;border-radius:12px;font-size:16px;margin-bottom:28px}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.card{background:#fff;border-radius:20px;padding:15px;text-align:center;box-shadow:0 5px 20px #00000012;transition:.25s;overflow:hidden;cursor:pointer}
+.card{background:#fff;border-radius:22px;padding:14px;text-align:center;box-shadow:0 6px 24px #00000012;transition:transform .25s,box-shadow .25s;overflow:hidden;cursor:pointer;border:1px solid #eee}.card:hover{transform:translateY(-5px);box-shadow:0 14px 32px #0000001c}
 .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px #00000020}
-.pic{height:210px;background:#eee;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:80px;overflow:hidden}
-.pic img{width:100%;height:100%;object-fit:cover}
-.card h3{margin:16px 0 8px}
-.price{font-size:21px;font-weight:800;margin:10px}
+.pic{height:210px;background:#f5f5f5;border-radius:17px;display:flex;align-items:center;justify-content:center;font-size:80px;overflow:hidden;margin-bottom:4px}
+.pic img{width:100%;height:100%;object-fit:cover;transition:transform .35s}.card:hover .pic img{transform:scale(1.04)}
+.card h3{margin:14px 4px 7px;font-size:17px;line-height:1.3}
+.price{font-size:21px;font-weight:800;margin:9px 0 12px}
 .add,.buy,.checkout{width:100%;padding:13px;border-radius:12px;font-weight:bold;cursor:pointer}
 .add,.checkout{background:#111;color:#fff;border:0}
 .buy{margin-top:9px;background:#fff;color:#111;border:2px solid #111}
@@ -221,7 +221,7 @@ header{background:#111;color:#fff;padding:16px 5%;display:flex;justify-content:s
 .item{border-bottom:1px solid #ddd;padding:15px 0}
 .qty button{padding:7px 11px;margin:4px;border:1px solid #ddd;background:#fff;border-radius:8px;font-weight:bold;cursor:pointer}
 .modal{inset:0;background:#0008;align-items:center;justify-content:center;padding:20px}
-.modalBox{background:#fff;border-radius:20px;padding:25px;max-width:480px;width:100%;max-height:90vh;overflow:auto;text-align:center;position:relative}
+.modalBox{background:#fff;border-radius:24px;padding:28px;max-width:480px;width:100%;max-height:90vh;overflow:auto;text-align:left;position:relative;box-shadow:0 20px 60px #00000025}.modalBox h2{font-size:28px;margin:5px 0 22px}.formInput{box-sizing:border-box;font-size:15px;background:#fafafa;transition:.2s}.formInput:focus{outline:none;border-color:#111;background:#fff;box-shadow:0 0 0 3px #11111110}
 .modalImg{width:100%;height:280px;object-fit:cover;border-radius:15px}
 .sizeBtn{padding:9px 15px;border:1px solid #ddd;background:#fff;border-radius:8px;font-weight:bold;cursor:pointer}
 .sizeBtn.selected{background:#111;color:#fff}
@@ -666,7 +666,847 @@ button:active,a:active{
         padding:16px !important;
     }
 }
+
 </style>
+
+
+<style>
+/* NOVALEX MOBILE ADMIN FIX */
+html,body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden !important;
+}
+
+*{
+    box-sizing:border-box;
+    max-width:100%;
+}
+
+.adminWrap,
+.adminWrap *,
+.statsGrid,
+.statsGrid *,
+.productList,
+.productList *,
+.ordersSection,
+.ordersSection *,
+.orderCard,
+.productCard{
+    min-width:0 !important;
+}
+
+.adminWrap{
+    width:100% !important;
+    max-width:1100px !important;
+    margin:0 auto !important;
+    padding:12px !important;
+    overflow:hidden !important;
+}
+
+.statsGrid{
+    width:100% !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:10px !important;
+}
+
+.statCard{
+    min-width:0 !important;
+    overflow:hidden !important;
+}
+
+.statValue,
+.statLabel,
+.orderCard,
+.productList{
+    overflow-wrap:anywhere !important;
+    word-break:break-word !important;
+}
+
+button,
+select,
+input{
+    max-width:100% !important;
+}
+
+.ordersSection,
+.productList{
+    width:100% !important;
+    overflow:hidden !important;
+}
+
+@media(max-width:700px){
+    .adminWrap{
+        padding:10px !important;
+    }
+
+    .statsGrid{
+        grid-template-columns:1fr !important;
+    }
+
+    .orderCard{
+        width:100% !important;
+        padding:14px !important;
+        margin-left:0 !important;
+        margin-right:0 !important;
+    }
+
+    .orderCard button,
+    .orderCard select{
+        width:100% !important;
+        margin:5px 0 !important;
+    }
+
+    .productList > div{
+        width:100% !important;
+        overflow:hidden !important;
+    }
+
+    input,
+    select{
+        width:100% !important;
+    }
+}
+</style>
+
+<style>
+/* NOVALEX FINAL MOBILE ORDERS FIX */
+html,body{
+    overflow-x:hidden !important;
+}
+
+@media(max-width:700px){
+
+    .adminWrap{
+        width:100% !important;
+        max-width:100% !important;
+        padding:10px !important;
+        margin:0 !important;
+        overflow:hidden !important;
+    }
+
+    /* Orders status counters */
+    .ordersSection{
+        width:100% !important;
+        max-width:100% !important;
+        overflow:hidden !important;
+    }
+
+    .ordersSection .statsGrid,
+    .ordersSection .orderStats,
+    .ordersSection .statusStats{
+        width:100% !important;
+        max-width:100% !important;
+        display:grid !important;
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:8px !important;
+        overflow:hidden !important;
+    }
+
+    .ordersSection .statCard,
+    .ordersSection .statusCard,
+    .ordersSection .orderStat{
+        width:100% !important;
+        min-width:0 !important;
+        max-width:100% !important;
+        overflow:hidden !important;
+    }
+
+    /* Search */
+    .ordersSection input{
+        width:100% !important;
+        max-width:100% !important;
+    }
+
+    /* Order cards */
+    .orderCard{
+        width:100% !important;
+        max-width:100% !important;
+        min-width:0 !important;
+        overflow:hidden !important;
+        word-break:break-word !important;
+    }
+
+    .orderCard button,
+    .orderCard select{
+        max-width:100% !important;
+    }
+
+    /* Product inventory */
+    .productList{
+        width:100% !important;
+        max-width:100% !important;
+        overflow:hidden !important;
+    }
+
+    .productList > div{
+        width:100% !important;
+        max-width:100% !important;
+        min-width:0 !important;
+        overflow:hidden !important;
+        word-break:break-word !important;
+    }
+}
+</style>
+
+<style>
+/* NOVALEX PREMIUM ORDERS MOBILE */
+.orderStatsGrid{
+    width:100% !important;
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:12px !important;
+    margin:16px 0 20px !important;
+    box-sizing:border-box !important;
+}
+
+.orderStatCard{
+    width:100% !important;
+    min-width:0 !important;
+    height:76px !important;
+    padding:12px 8px !important;
+    border:1px solid #333 !important;
+    border-radius:16px !important;
+    background:linear-gradient(145deg,#292929,#1b1b1b) !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+}
+
+.orderStatLabel{
+    font-size:11px !important;
+    letter-spacing:1px !important;
+    color:#999 !important;
+    font-weight:600 !important;
+    margin-bottom:5px !important;
+}
+
+.orderStatCard b{
+    font-size:24px !important;
+    line-height:1 !important;
+    color:#fff !important;
+}
+
+@media(max-width:700px){
+    .orderStatsGrid{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:10px !important;
+    }
+
+    .orderStatCard:last-child{
+        grid-column:1 / -1 !important;
+        width:50% !important;
+        justify-self:center !important;
+    }
+}
+</style>
+
+<style>
+/* NOVALEX FINAL PHONE UI */
+@media(max-width:700px){
+html,body{
+    width:100vw!important;
+    max-width:100vw!important;
+    overflow-x:hidden!important;
+}
+
+.adminWrap{
+    width:100%!important;
+    max-width:100%!important;
+    padding:12px!important;
+    margin:0!important;
+}
+
+.orderStatsGrid{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    width:100%!important;
+    gap:10px!important;
+    margin:12px 0 18px!important;
+}
+
+.orderStatCard{
+    width:100%!important;
+    height:64px!important;
+    padding:8px!important;
+    border-radius:14px!important;
+}
+
+.orderStatCard:last-child{
+    grid-column:1/-1!important;
+    width:calc(50% - 5px)!important;
+    margin:auto!important;
+}
+
+.orderStatLabel{
+    font-size:10px!important;
+    margin-bottom:3px!important;
+}
+
+.orderStatCard b{
+    font-size:20px!important;
+}
+
+.ordersSection{
+    width:100%!important;
+    max-width:100%!important;
+    overflow:hidden!important;
+}
+
+.orderCard{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0 0 14px!important;
+    padding:14px!important;
+    overflow:hidden!important;
+}
+
+.orderCard button,
+.orderCard select{
+    max-width:100%!important;
+}
+
+#orderSearch{
+    width:100%!important;
+    max-width:100%!important;
+}
+
+}
+</style>
+
+<style>
+/* ===== NOVALEX ADMIN ORDERS — PREMIUM RESPONSIVE ===== */
+
+.orderStatsGrid{
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    gap:10px!important;
+    width:100%!important;
+    margin:16px 0 20px!important;
+    box-sizing:border-box!important;
+}
+
+.orderStatsGrid > div{
+    width:100%!important;
+    min-width:0!important;
+    height:78px!important;
+    padding:10px!important;
+    border:1px solid rgba(255,255,255,.08)!important;
+    border-radius:16px!important;
+    background:linear-gradient(145deg,#292929,#181818)!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:center!important;
+    align-items:center!important;
+    box-sizing:border-box!important;
+    box-shadow:0 8px 24px rgba(0,0,0,.18)!important;
+}
+
+.orderStatsGrid > div > div{
+    font-size:10px!important;
+    letter-spacing:1px!important;
+    font-weight:600!important;
+    color:#999!important;
+    margin-bottom:5px!important;
+}
+
+.orderStatsGrid > div > b{
+    font-size:22px!important;
+    line-height:1!important;
+    color:#fff!important;
+}
+
+@media(max-width:700px){
+    html,body{
+        width:100%!important;
+        max-width:100%!important;
+        overflow-x:hidden!important;
+    }
+
+    .adminWrap{
+        width:100%!important;
+        max-width:100%!important;
+        padding:12px!important;
+        margin:0!important;
+        overflow:hidden!important;
+    }
+
+    .orderStatsGrid{
+        grid-template-columns:repeat(2,minmax(0,1fr))!important;
+        gap:10px!important;
+        margin:14px 0 18px!important;
+    }
+
+    .orderStatsGrid > div{
+        height:70px!important;
+        border-radius:15px!important;
+    }
+
+    .orderStatsGrid > div:last-child{
+        grid-column:1 / -1!important;
+        width:50%!important;
+        justify-self:center!important;
+    }
+
+    .ordersSection{
+        width:100%!important;
+        max-width:100%!important;
+        overflow:hidden!important;
+    }
+
+    #orderSearch{
+        width:100%!important;
+        max-width:100%!important;
+        margin:8px 0 14px!important;
+        font-size:14px!important;
+    }
+
+    .orderCard{
+        width:100%!important;
+        max-width:100%!important;
+        min-width:0!important;
+        padding:16px!important;
+        margin:0 0 14px!important;
+        border-radius:18px!important;
+        overflow:hidden!important;
+        box-sizing:border-box!important;
+    }
+
+    .orderCard button,
+    .orderCard select{
+        max-width:100%!important;
+    }
+}
+</style>
+
+<style>
+/* ===== NOVALEX PREMIUM INVENTORY ===== */
+#productList{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:14px!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+}
+
+#productList > div{
+    background:linear-gradient(145deg,#292929,#171717)!important;
+    border:1px solid rgba(255,255,255,.09)!important;
+    border-radius:18px!important;
+    padding:16px!important;
+    margin:0!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+    box-shadow:0 10px 28px rgba(0,0,0,.22)!important;
+}
+
+#productList > div b{
+    display:block!important;
+    font-size:17px!important;
+    color:#fff!important;
+    margin-bottom:7px!important;
+}
+
+#productList > div span{
+    display:inline-block!important;
+    padding:6px 10px!important;
+    border-radius:20px!important;
+    background:rgba(255,255,255,.06)!important;
+    font-size:12px!important;
+    margin:6px 0 10px!important;
+}
+
+#productList > div button{
+    border:0!important;
+    border-radius:10px!important;
+    padding:9px 12px!important;
+    margin:4px 4px 0 0!important;
+    cursor:pointer!important;
+}
+
+@media(max-width:700px){
+    #productList{
+        grid-template-columns:1fr!important;
+        gap:12px!important;
+    }
+
+    #productList > div{
+        width:100%!important;
+        padding:14px!important;
+    }
+}
+</style>
+
+<style>
+/* ===== NOVALEX CUSTOMER STOCK UI ===== */
+.stockBadge{
+    display:inline-flex!important;
+    align-items:center!important;
+    padding:5px 9px!important;
+    border-radius:999px!important;
+    font-size:11px!important;
+    font-weight:700!important;
+    letter-spacing:.3px!important;
+    margin:7px 0!important;
+}
+
+.stockGood{
+    background:rgba(34,197,94,.12)!important;
+    color:#6ee7a0!important;
+    border:1px solid rgba(34,197,94,.25)!important;
+}
+
+.stockLow{
+    background:rgba(245,158,11,.12)!important;
+    color:#fbbf24!important;
+    border:1px solid rgba(245,158,11,.25)!important;
+}
+
+.stockOut{
+    background:rgba(239,68,68,.12)!important;
+    color:#f87171!important;
+    border:1px solid rgba(239,68,68,.25)!important;
+}
+
+.card .stockBadge{
+    max-width:100%!important;
+    overflow:hidden!important;
+}
+
+.card button:disabled{
+    opacity:.55!important;
+    cursor:not-allowed!important;
+}
+
+@media(max-width:700px){
+    .card{
+        width:100%!important;
+        max-width:100%!important;
+        overflow:hidden!important;
+    }
+}
+</style>
+
+<style>
+/* ===== NOVALEX PREMIUM CART CONTROLS ===== */
+.cartQty{
+    display:inline-flex;
+    align-items:center;
+    gap:0;
+    border:1px solid rgba(255,255,255,.12);
+    background:#181818;
+    border-radius:12px;
+    overflow:hidden;
+    margin-top:8px;
+}
+.cartQty button{
+    width:34px!important;
+    height:34px!important;
+    padding:0!important;
+    border:0!important;
+    background:#252525!important;
+    color:#fff!important;
+    font-size:18px!important;
+    font-weight:700!important;
+    cursor:pointer;
+}
+.cartQty button:active{transform:scale(.94);}
+.cartQty span{
+    min-width:34px;
+    text-align:center;
+    font-weight:700;
+    font-size:14px;
+}
+.stockBadge{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    padding:5px 9px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:700;
+    margin-top:7px;
+}
+.stockGood{background:rgba(34,197,94,.12);color:#4ade80;}
+.stockLow{background:rgba(245,158,11,.12);color:#fbbf24;}
+.stockOut{background:rgba(239,68,68,.12);color:#f87171;}
+@media(max-width:700px){
+    .cartQty button{width:38px!important;height:38px!important;}
+    .cartQty span{min-width:38px;}
+}
+</style>
+
+<style>
+/* ===== NOVALEX INVENTORY STATUS ===== */
+.inventoryStatus{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.3px;
+}
+.inventoryStatus.good{
+    background:rgba(34,197,94,.12);
+    color:#4ade80;
+}
+.inventoryStatus.low{
+    background:rgba(245,158,11,.12);
+    color:#fbbf24;
+}
+.inventoryStatus.out{
+    background:rgba(239,68,68,.12);
+    color:#f87171;
+}
+</style>
+
+<style>
+/* ===== NOVALEX PREMIUM INVENTORY CARDS ===== */
+.inventoryGrid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+    margin-top:14px;
+}
+.inventoryCard{
+    background:linear-gradient(145deg,#252525,#151515);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:14px;
+    box-sizing:border-box;
+}
+.inventoryCardTop{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    align-items:flex-start;
+}
+.inventoryProductName{
+    font-weight:800;
+    font-size:14px;
+}
+.inventoryProductMeta{
+    color:#999;
+    font-size:11px;
+    margin-top:4px;
+}
+.inventoryActions{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:13px;
+}
+.inventoryActions button{
+    width:36px!important;
+    height:36px!important;
+    padding:0!important;
+    border-radius:10px!important;
+    font-size:18px!important;
+    font-weight:800!important;
+}
+@media(max-width:700px){
+    .inventoryGrid{grid-template-columns:1fr;}
+}
+</style>
+
+<style>
+/* ===== NOVALEX FINAL CART + CHECKOUT BATCH ===== */
+.cartSummary,.checkoutSummary{
+    background:linear-gradient(145deg,#242424,#151515)!important;
+    border:1px solid rgba(255,255,255,.08)!important;
+    border-radius:18px!important;
+    padding:16px!important;
+    box-sizing:border-box!important;
+}
+.cartQty{
+    box-shadow:0 6px 18px rgba(0,0,0,.18);
+}
+.cartQty button:disabled{
+    opacity:.35!important;
+    cursor:not-allowed!important;
+}
+.checkoutRow{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    padding:10px 0;
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+.checkoutRow:last-child{border-bottom:0;}
+.checkoutTotal{
+    font-size:22px;
+    font-weight:900;
+}
+.checkoutStockWarning{
+    margin-top:10px;
+    padding:10px 12px;
+    border-radius:12px;
+    background:rgba(245,158,11,.10);
+    color:#fbbf24;
+    font-size:12px;
+    font-weight:700;
+}
+.orderSuccessCard{
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    background:linear-gradient(145deg,#252525,#151515);
+    padding:20px;
+    box-shadow:0 12px 35px rgba(0,0,0,.22);
+}
+@media(max-width:700px){
+    .cartSummary,.checkoutSummary{
+        width:100%!important;
+        padding:14px!important;
+    }
+    .checkoutRow{
+        font-size:13px;
+    }
+    .checkoutTotal{
+        font-size:20px;
+    }
+}
+</style>
+
+<style>
+/* ===== NOVALEX FULL STORE POLISH ===== */
+.cartQty{display:inline-flex!important;align-items:center!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:12px!important;overflow:hidden!important;background:#171717!important}
+.cartQty button{width:36px!important;height:36px!important;padding:0!important;border:0!important;background:#252525!important;color:#fff!important;font-size:18px!important;font-weight:800!important}
+.cartQty span{min-width:38px!important;text-align:center!important;font-weight:800!important}
+.cartQty button:disabled{opacity:.35!important}
+.stockBadge{display:inline-flex!important;padding:5px 9px!important;border-radius:999px!important;font-size:11px!important;font-weight:800!important;margin-top:7px!important}
+.stockGood{background:rgba(34,197,94,.12)!important;color:#4ade80!important}
+.stockLow{background:rgba(245,158,11,.12)!important;color:#fbbf24!important}
+.stockOut{background:rgba(239,68,68,.12)!important;color:#f87171!important}
+.cartSummary,.checkoutSummary,.orderSuccessCard{background:linear-gradient(145deg,#252525,#151515)!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:18px!important;box-sizing:border-box!important}
+.checkoutRow{display:flex!important;justify-content:space-between!important;gap:12px!important;padding:10px 0!important;border-bottom:1px solid rgba(255,255,255,.06)!important}
+.checkoutTotal{font-size:22px!important;font-weight:900!important}
+@media(max-width:700px){
+ .cartSummary,.checkoutSummary,.orderSuccessCard{width:100%!important}
+ .cartQty button{width:38px!important;height:38px!important}
+ .checkoutRow{font-size:13px!important}
+}
+</style>
+
+<style>
+/* ===== NOVALEX FINAL ADMIN + MOBILE BATCH ===== */
+
+.adminWrap,.ordersSection{
+    width:100%!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+}
+
+.statsGrid{
+    width:100%!important;
+    box-sizing:border-box!important;
+}
+
+.orderStatsGrid{
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    gap:10px!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+}
+
+.orderStatsGrid>div{
+    min-width:0!important;
+    height:78px!important;
+    box-sizing:border-box!important;
+    border-radius:16px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    overflow:hidden!important;
+}
+
+.orderStatLabel{
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    max-width:100%!important;
+}
+
+.orderCard{
+    width:100%!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+}
+
+#orderSearch{
+    width:100%!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+}
+
+.inventoryBox{
+    width:100%!important;
+    box-sizing:border-box!important;
+}
+
+.inventoryGrid{
+    width:100%!important;
+    box-sizing:border-box!important;
+}
+
+@media(max-width:700px){
+    .statsGrid{
+        grid-template-columns:1fr 1fr!important;
+    }
+
+    .orderStatsGrid{
+        grid-template-columns:repeat(2,minmax(0,1fr))!important;
+        gap:9px!important;
+    }
+
+    .orderStatsGrid>div{
+        height:68px!important;
+        padding:8px!important;
+    }
+
+    .orderStatsGrid>div:last-child{
+        grid-column:1/-1!important;
+        width:50%!important;
+        justify-self:center!important;
+    }
+
+    .orderCard{
+        padding:13px!important;
+        border-radius:16px!important;
+    }
+
+    .inventoryGrid{
+        grid-template-columns:1fr!important;
+    }
+
+    .adminWrap{
+        padding-left:10px!important;
+        padding-right:10px!important;
+    }
+
+    button,input,select{
+        max-width:100%;
+    }
+}
+
+@media(max-width:380px){
+    .orderStatsGrid>div:last-child{
+        width:65%!important;
+    }
+
+    .orderStatsGrid{
+        gap:7px!important;
+    }
+}
 </style>
 </head>
 <body>
@@ -689,8 +1529,8 @@ CONTINUE
 
 
 
-<header>
-<div class="logo">NOVALEX</div>
+<header style="display:flex;align-items:center;justify-content:space-between;gap:15px;padding:12px 20px;min-height:70px;">
+<div class="logo"><img src="/static/images/novalex-logo.png" alt="NOVALEX" style="height:54px;max-width:180px;width:auto;object-fit:contain;display:block;"></div>
 <div style="display:flex;gap:8px;align-items:center">
 <a href="/my-orders" style="background:#fff;color:#111;padding:11px 14px;border-radius:25px;font-weight:bold;text-decoration:none">📦 My Orders</a>
 <a href="/profile" style="background:#fff;color:#111;padding:11px 14px;border-radius:25px;font-weight:bold;text-decoration:none">👤 Profile</a>
@@ -792,7 +1632,14 @@ function showProducts(){
    <div class="pic"><img src="${p.image}" onerror="this.style.display='none';this.parentElement.innerHTML=p.icon"></div>
    <h3>${p.name}</h3>
    <div class="price">₹${p.price}</div>
-   <button class="add" onclick="event.stopPropagation();add(${p.id})">ADD TO CART</button>
+   <div style="font-size:12px;font-weight:700;color:${Number(p.stock??10)>0 ? "#168a3b" : "#d93025"};margin-bottom:8px">
+   ${Number(p.stock??10)>0 ? "● IN STOCK" : "● OUT OF STOCK"}
+   </div>
+   <button class="add" ${Number(p.stock??10)<=0 ? "disabled" : ""}
+   style="${Number(p.stock??10)<=0 ? "opacity:.5;cursor:not-allowed" : ""}"
+   onclick="event.stopPropagation();add(${p.id})">
+   ${Number(p.stock??10)<=0 ? "OUT OF STOCK" : "ADD TO CART"}
+   </button>
    <button class="buy" onclick="event.stopPropagation();buyNow(${p.id})">BUY NOW</button>
    <button class="wish" id="wish-${p.id}" onclick="event.stopPropagation();toggleWishlist(${p.id})">♡ WISHLIST</button>
   </div>`;
@@ -802,9 +1649,26 @@ function showProducts(){
 function add(id){
  const p=products.find(x=>x.id===id);
  if(!p)return;
+
+ const stock=Number(p.stock ?? 10);
+
+ if(stock<=0){
+   alert("This product is currently Out of Stock.");
+   return;
+ }
+
  const x=cart.find(x=>x.id===id);
- if(x)x.qty++;
- else cart.push({...p,qty:1});
+
+ if(x){
+   if(x.qty>=stock){
+     alert("Only "+stock+" item(s) available in stock.");
+     return;
+   }
+   x.qty++;
+ }else{
+   cart.push({...p,qty:1});
+ }
+
  save();
  alert("Added to cart!");
 }
@@ -861,10 +1725,17 @@ function removeItem(i){
 function showDetails(id){
  showNovaLoader();
  const p=products.find(x=>x.id===id);
+ if(!p)return;
  document.getElementById("detailImg").src=p.image;
+ document.getElementById("detailImg").onerror=function(){
+   this.style.display="none";
+ };
  document.getElementById("detailName").innerText=p.name;
- document.getElementById("detailPrice").innerText=p.price;
- document.getElementById("detailAdd").onclick=function(){add(p.id);closeDetails();};
+ document.getElementById("detailPrice").innerText="₹"+p.price;
+ document.getElementById("detailAdd").onclick=function(){
+   add(p.id);
+   closeDetails();
+ };
  document.getElementById("details").style.display="flex";
 }
 
@@ -1106,23 +1977,113 @@ def delete_wishlist(product_id):
 @app.route("/api/order",methods=["POST"])
 def create_order():
     data=request.get_json() or {}
+    items=data.get("items",[])
+
+    if not items:
+        return jsonify({"success":False,"message":"Cart is empty."}),400
+
+    # FINAL SERVER-SIDE STOCK LOCK
+    con=db()
+    try:
+        for item in items:
+            product_id=int(item.get("id",0))
+            qty=max(1,int(item.get("qty",1)))
+
+            row=con.execute(
+                "SELECT name,stock FROM products WHERE id=?",
+                (product_id,)
+            ).fetchone()
+
+            if not row:
+                con.close()
+                return jsonify({
+                    "success":False,
+                    "message":"Product no longer exists."
+                }),404
+
+            stock=int(row["stock"] or 0)
+
+            if stock < qty:
+                con.close()
+                return jsonify({
+                    "success":False,
+                    "message":f'{row["name"]} has only {stock} item(s) available.'
+                }),400
+    except Exception as e:
+        con.close()
+        return jsonify({"success":False,"message":str(e)}),500
+
+    con.close()
 
     con=db()
-    cur=con.execute("""
-        INSERT INTO orders(name,phone,address,payment,items,total)
-        VALUES(?,?,?,?,?,?)
-    """,(
-        data.get("name",""),
-        data.get("phone",""),
-        data.get("address",""),
-        data.get("payment","COD"),
-        str(data.get("items",[])),
-        int(data.get("total",0))
-    ))
-    con.commit()
 
-    order_id=cur.lastrowid
+    try:
+        # Check stock before creating order
+        for item in items:
+            product_id=int(item.get("id",0))
+            qty=max(1,int(item.get("qty",1)))
+
+            row=con.execute(
+                "SELECT name,stock FROM products WHERE id=?",
+                (product_id,)
+            ).fetchone()
+
+            if not row:
+                con.rollback()
+                con.close()
+                return jsonify({
+                    "success":False,
+                    "message":"Product not found."
+                }),404
+
+            stock=int(row["stock"] or 0)
+
+            if stock < qty:
+                con.rollback()
+                con.close()
+                return jsonify({
+                    "success":False,
+                    "message":f"Only {stock} item(s) available for {row['name']}."
+                }),400
+
+        # Reduce stock
+        for item in items:
+            product_id=int(item.get("id",0))
+            qty=max(1,int(item.get("qty",1)))
+
+            con.execute(
+                "UPDATE products SET stock=stock-? WHERE id=?",
+                (qty,product_id)
+            )
+
+        # Create order
+        cur=con.execute("""
+            INSERT INTO orders(name,phone,address,payment,items,total)
+            VALUES(?,?,?,?,?,?)
+        """,(
+            data.get("name",""),
+            data.get("phone",""),
+            data.get("address",""),
+            data.get("payment","COD"),
+            str(items),
+            int(data.get("total",0))
+        ))
+
+        con.commit()
+        order_id=cur.lastrowid
+
+    except Exception as e:
+        con.rollback()
+        con.close()
+        return jsonify({
+            "success":False,
+            "message":str(e)
+        }),500
+
     con.close()
+
+    PRODUCTS.clear()
+    PRODUCTS.extend(load_products())
 
     return jsonify({
         "success":True,
@@ -1140,6 +2101,7 @@ def add_product():
     name=data.get("name","New Product").strip()
     price=int(data.get("price",0))
     category=data.get("category","T-Shirts")
+    stock=max(0,int(data.get("stock",10)))
 
     if not name or price <= 0:
         return jsonify({
@@ -1226,6 +2188,7 @@ def update_product(product_id):
     name = data.get("name", "").strip()
     price = int(data.get("price", 0))
     category = data.get("category", "T-Shirts")
+    stock=max(0,int(data.get("stock",10)))
 
     if not name or price <= 0:
         return jsonify({
@@ -1259,7 +2222,7 @@ def update_product(product_id):
 
     con.execute("""
         UPDATE products
-        SET name=?, price=?, category=?, image=?, icon=?
+        SET name=?, price=?, category=?, image=?, icon=?, stock=?
         WHERE id=?
     """, (name, price, category, image, icon, product_id))
 
@@ -1359,37 +2322,66 @@ def delete_order(order_id):
 
 @app.route("/api/order/<int:order_id>/cancel", methods=["PUT"])
 def cancel_order(order_id):
-    con = db()
+    import ast
 
-    row = con.execute(
-        "SELECT status FROM orders WHERE id=?",
+    con=db()
+
+    row=con.execute(
+        "SELECT id,status,items FROM orders WHERE id=?",
         (order_id,)
     ).fetchone()
 
     if not row:
         con.close()
         return jsonify({
-            "success": False,
-            "message": "Order not found."
-        }), 404
+            "success":False,
+            "message":"Order not found."
+        }),404
 
-    if row["status"] != "Pending":
+    # Prevent restoring stock twice
+    if row["status"]=="Cancelled":
         con.close()
         return jsonify({
-            "success": False,
-            "message": "Only Pending orders can be cancelled."
-        }), 400
+            "success":False,
+            "message":"Order is already cancelled."
+        }),400
 
-    con.execute(
-        "UPDATE orders SET status=? WHERE id=?",
-        ("Cancelled", order_id)
-    )
-    con.commit()
+    try:
+        items=ast.literal_eval(row["items"] or "[]")
+
+        # Return ordered quantity to inventory
+        for item in items:
+            product_id=int(item.get("id",0))
+            qty=max(1,int(item.get("qty",1)))
+
+            con.execute(
+                "UPDATE products SET stock=stock+? WHERE id=?",
+                (qty,product_id)
+            )
+
+        con.execute(
+            "UPDATE orders SET status=? WHERE id=?",
+            ("Cancelled",order_id)
+        )
+
+        con.commit()
+
+    except Exception as e:
+        con.rollback()
+        con.close()
+        return jsonify({
+            "success":False,
+            "message":str(e)
+        }),500
+
     con.close()
 
+    PRODUCTS.clear()
+    PRODUCTS.extend(load_products())
+
     return jsonify({
-        "success": True,
-        "message": "Order cancelled successfully!"
+        "success":True,
+        "message":"Order cancelled and stock restored successfully!"
     })
 
 
@@ -1398,7 +2390,7 @@ def update_order_status(order_id):
     data = request.get_json() or {}
     status = data.get("status", "Pending")
 
-    allowed = ["Pending", "Confirmed", "Shipped", "Delivered"]
+    allowed = ["Pending", "Confirmed", "Shipped", "Delivered", "Cancelled"]
 
     if status not in allowed:
         return jsonify({
@@ -1437,16 +2429,54 @@ def my_orders_page():
 body{
     margin:0;
     font-family:Arial,sans-serif;
-    background:#111;
+    background:linear-gradient(135deg,#070707,#1c1c1c);
     color:white;
-    padding:25px;
+    padding:20px;
+    min-height:100vh;
+    box-sizing:border-box;
 }
 .box{
-    max-width:500px;
-    margin:40px auto;
-    background:#222;
-    padding:25px;
+    max-width:520px;
+    margin:35px auto;
+    background:rgba(255,255,255,.07);
+    padding:28px;
+    border-radius:26px;
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+    backdrop-filter:blur(14px);
+}
+.box h1{
+    margin:0;
+    font-size:30px;
+    letter-spacing:1px;
+}
+.box h2{
+    margin:8px 0 22px;
+    color:#ccc;
+    font-size:18px;
+    font-weight:500;
+}
+input{
+    background:#fff;
+    color:#111;
+    font-size:15px;
+}
+button{
+    background:#fff;
+    color:#111;
+    transition:.2s;
+}
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 22px rgba(255,255,255,.15);
+}
+.order{
+    background:rgba(255,255,255,.08);
+    padding:18px;
+    margin-top:14px;
     border-radius:18px;
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 8px 25px rgba(0,0,0,.2);
 }
 input,button{
     width:100%;
@@ -1466,6 +2496,7 @@ button{
     margin-top:12px;
     border-radius:12px;
 }
+
 </style>
 </head>
 <body>
@@ -1504,16 +2535,18 @@ function cancelOrder(id){
 
 function loadOrders(){
     let phone=document.getElementById("phone").value.trim();
-phone=phone.replace(/[\\s-]/g,"");
-if(phone.startsWith("+91")){
-    phone=phone.substring(3);
-}
-if(phone.startsWith("91") && phone.length===12){
-    phone=phone.substring(2);
-}
-if(phone.length===10){
-    phone="0"+phone;
-}
+    phone=phone.replace(/[\\s-]/g,"");
+
+    if(phone.startsWith("+91")){
+        phone=phone.substring(3);
+    }
+    if(phone.startsWith("91") && phone.length===12){
+        phone=phone.substring(2);
+    }
+    if(phone.length===10){
+        phone="0"+phone;
+    }
+
     const result=document.getElementById("result");
 
     if(!phone){
@@ -1521,42 +2554,73 @@ if(phone.length===10){
         return;
     }
 
-    result.innerHTML="<p>Loading...</p>";
+    result.innerHTML='<div style="text-align:center;padding:20px;color:#bbb;">Loading your orders...</div>';
 
     fetch("/api/my-orders?phone="+encodeURIComponent(phone))
     .then(r=>r.json())
     .then(data=>{
-        if(!data.success){
-            result.innerHTML="<p>"+data.message+"</p>";
+        if(!data.success || !data.orders || data.orders.length===0){
+            result.innerHTML=`
+                <div style="text-align:center;padding:30px 10px;color:#bbb;">
+                    <div style="font-size:45px;">📦</div>
+                    <h3 style="color:white;">No Orders Found</h3>
+                    <p>We couldn't find any orders for this number.</p>
+                </div>`;
             return;
         }
 
-        if(data.orders.length===0){
-            result.innerHTML="<p>No orders found.</p>";
-            return;
-        }
+        result.innerHTML=data.orders.map(o=>{
+            let status=o.status || "Pending";
+            let icon=status==="Delivered"?"✅":
+                     status==="Shipped"?"🚚":
+                     status==="Confirmed"?"📋":"⏳";
 
-        result.innerHTML=data.orders.map(o=>`
+            let items=(o.items||[]).map(i=>
+                `<div style="display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #ffffff12;">
+                    <span>${i.name} × ${i.qty}</span>
+                    <b>₹${i.price*i.qty}</b>
+                </div>`
+            ).join("");
+
+            return `
             <div class="order">
-                <h3>Order #${o.id}</h3>
-                <p>Total: ₹${o.total}</p>
-                <p>Status: <b>${o.status}</b></p>
-                <button onclick="location.href='/track?order=${o.id}'">
-                    📦 Track Order
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+                    <div>
+                        <div style="font-size:12px;color:#aaa;">ORDER</div>
+                        <h3 style="margin:3px 0;">#${o.id}</h3>
+                    </div>
+                    <span style="background:#fff;color:#111;padding:7px 11px;border-radius:20px;font-size:12px;font-weight:800;">
+                        ${icon} ${status}
+                    </span>
+                </div>
+
+                <div style="margin-top:15px;color:#ddd;">
+                    ${items}
+                </div>
+
+                <div style="display:flex;justify-content:space-between;margin-top:15px;font-size:17px;">
+                    <span>Total</span>
+                    <b>₹${o.total}</b>
+                </div>
+
+                <button onclick="window.location.href='/track?order=${o.id}'"
+                    style="margin-top:15px;">
+                    🚚 TRACK ORDER
                 </button>
 
-                ${o.status==="Pending" ? `
-                <button onclick="cancelOrder(${o.id})" style="background:#d33;color:white">
-                    ❌ Cancel Order
-                </button>
-                ` : ""}
-            </div>
-        `).join("");
+                ${status==="Pending" ? `
+                <button onclick="cancelOrder(${o.id})"
+                    style="background:#222;color:#fff;border:1px solid #555;margin-top:8px;">
+                    CANCEL ORDER
+                </button>` : ""}
+            </div>`;
+        }).join("");
     })
     .catch(()=>{
-        result.innerHTML="<p>Unable to load orders.</p>";
+        result.innerHTML='<p style="text-align:center;color:#ff8a8a;">Unable to load orders. Please try again.</p>';
     });
 }
+
 </script>
 
 </body>
@@ -1604,6 +2668,7 @@ button{
     font-weight:bold;
     cursor:pointer;
 }
+
 </style>
 </head>
 <body>
@@ -1714,6 +2779,7 @@ button{
     color:white;
     padding:8px 12px;
 }
+
 </style>
 </head>
 <body>
@@ -1794,37 +2860,66 @@ def track_page():
 body{
     margin:0;
     font-family:Arial,sans-serif;
-    background:#111;
+    background:linear-gradient(135deg,#080808,#1b1b1b);
     color:white;
-    padding:25px;
+    padding:20px;
+    min-height:100vh;
+    box-sizing:border-box;
 }
 .box{
-    max-width:500px;
-    margin:40px auto;
-    background:#222;
-    padding:25px;
-    border-radius:18px;
+    max-width:520px;
+    margin:45px auto;
+    background:rgba(255,255,255,.07);
+    padding:28px;
+    border-radius:26px;
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+    backdrop-filter:blur(12px);
+}
+.box h1{
+    margin:0 0 8px;
+    font-size:30px;
+    letter-spacing:1px;
+}
+.box h2{
+    margin:0 0 22px;
+    font-size:18px;
+    color:#ccc;
+    font-weight:500;
 }
 input,button{
     width:100%;
     box-sizing:border-box;
-    padding:14px;
+    padding:15px;
     margin-top:10px;
-    border-radius:10px;
-    border:0;
+    border-radius:13px;
+    border:1px solid #333;
+}
+input{
+    background:#fff;
+    color:#111;
+    font-size:15px;
 }
 button{
-    font-weight:bold;
+    background:#fff;
+    color:#111;
+    font-weight:800;
     cursor:pointer;
+    transition:.2s;
+}
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(255,255,255,.12);
 }
 #result{
-    margin-top:20px;
+    margin-top:24px;
 }
 .status{
-    font-size:22px;
+    font-size:23px;
     font-weight:bold;
     margin-top:10px;
 }
+
 </style>
 </head>
 <body>
@@ -1925,12 +3020,39 @@ def admin():
     return render_template_string("""
     <html>
     <head><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-    <body style="font-family:Arial;background:#111;color:white;padding:25px">
+    <body style="font-family:Arial;background:linear-gradient(135deg,#050505,#181818);color:white;padding:20px;min-height:100vh;box-sizing:border-box">
     <style>
 .adminWrap{
     max-width:1100px;
     margin:auto;
+    padding-bottom:40px;
 }
+.adminWrap input,.adminWrap select{
+    background:#111!important;
+    color:white;
+    border:1px solid #333;
+    border-radius:12px;
+    outline:none;
+    transition:.2s;
+}
+.adminWrap input:focus,.adminWrap select:focus{
+    border-color:#fff;
+    box-shadow:0 0 0 3px #ffffff12;
+}
+.adminWrap button{
+    cursor:pointer;
+    transition:.2s;
+}
+.adminWrap button:hover{
+    transform:translateY(-2px);
+}
+.adminSection{
+    background:rgba(255,255,255,.06)!important;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:22px!important;
+    box-shadow:0 15px 45px rgba(0,0,0,.3);
+}
+
 .adminTitle{
     font-size:32px;
     font-weight:800;
@@ -1971,6 +3093,7 @@ def admin():
     .statsGrid{grid-template-columns:1fr}
     .adminTitle{font-size:26px}
 }
+
 </style>
 
 <div class="adminWrap">
@@ -2000,13 +3123,18 @@ def admin():
     </div>
 </div>
 
-    <div style="background:#222;padding:20px;border-radius:15px;margin:15px 0">
-    <h2>📦 Products Management</h2>
+    <div class="adminSection" style="padding:22px;margin:18px 0">
+    <h2 style="margin-top:0;font-size:24px">📦 Products Management</h2>
+<p style="color:#aaa;margin-top:-8px">Add, edit and manage your NovaLex products.</p>
 
     <input id="pname" placeholder="Product Name"
     style="width:100%;padding:12px;margin:5px 0;box-sizing:border-box">
 
     <input id="pprice" type="number" placeholder="Price"
+    style="width:100%;padding:12px;margin:5px 0;box-sizing:border-box">
+
+    <input id="pstock" type="number" min="0" placeholder="Stock Quantity"
+    value="10"
     style="width:100%;padding:12px;margin:5px 0;box-sizing:border-box">
 
     <select id="pcat"
@@ -2028,7 +3156,34 @@ def admin():
     </div>
 
     <script>
-    function loadAdminProducts(){
+    function loadAdminStats(){
+    fetch("/api/admin-products")
+    .then(r=>r.json())
+    .then(d=>{
+        const el=document.getElementById("statProducts");
+        if(el) el.innerText=(d.products||[]).length;
+    });
+
+    fetch("/api/orders")
+    .then(r=>r.json())
+    .then(d=>{
+        const orders=d.orders||[];
+        const el=document.getElementById("statOrders");
+        if(el) el.innerText=orders.length;
+
+        let sales=0;
+        orders.forEach(o=>{
+            if(o.status!=="Cancelled") sales+=Number(o.total||0);
+        });
+
+        const saleEl=document.getElementById("statSales");
+        if(saleEl) saleEl.innerText="₹"+sales;
+    });
+}
+
+loadAdminStats();
+
+function loadAdminProducts(){
         fetch("/api/admin-products")
         .then(r=>r.json())
         .then(data=>{
@@ -2042,7 +3197,10 @@ def admin():
             box.innerHTML=data.products.map(p=>`
                 <div style="border-top:1px solid #444;padding:12px 0">
                     <b>${p.name}</b><br>
-                    ₹${p.price} • ${p.category}
+                    ₹${p.price} • ${p.category}<br>
+                    <span style="color:${Number(p.stock)>0 ? "#8cff9a" : "#ff7777"};font-weight:bold">
+                    ${Number(p.stock)>0 ? "🟢 "+p.stock+" IN STOCK" : "🔴 OUT OF STOCK"}
+                    </span>
                     <br>
                     <button onclick="editProduct(${p.id},${JSON.stringify(p.name)},${p.price},${JSON.stringify(p.category)})"
                     style="margin-top:8px;padding:8px 12px;border:0;border-radius:8px">
@@ -2160,25 +3318,25 @@ def admin():
 <input id="orderSearch" oninput="searchOrders()" placeholder="🔎 Search Order ID, customer or phone"
 style="width:100%;box-sizing:border-box;padding:13px;margin:10px 0 15px;border-radius:12px;border:1px solid #444;background:#111;color:white">
 
-<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:15px 0">
-<div style="background:#222;padding:12px;border-radius:12px;text-align:center">
-<div style="font-size:12px;color:#aaa">PENDING</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:15px 0;width:100%;box-sizing:border-box">
+<div class="orderStatCard">
+<div class="orderStatLabel">PENDING</div>
 <b id="countPending">0</b>
 </div>
-<div style="background:#222;padding:12px;border-radius:12px;text-align:center">
-<div style="font-size:12px;color:#aaa">CONFIRMED</div>
+<div class="orderStatCard">
+<div class="orderStatLabel">CONFIRMED</div>
 <b id="countConfirmed">0</b>
 </div>
-<div style="background:#222;padding:12px;border-radius:12px;text-align:center">
-<div style="font-size:12px;color:#aaa">SHIPPED</div>
+<div class="orderStatCard">
+<div class="orderStatLabel">SHIPPED</div>
 <b id="countShipped">0</b>
 </div>
-<div style="background:#222;padding:12px;border-radius:12px;text-align:center">
-<div style="font-size:12px;color:#aaa">DELIVERED</div>
+<div class="orderStatCard">
+<div class="orderStatLabel">DELIVERED</div>
 <b id="countDelivered">0</b>
 </div>
-<div style="background:#222;padding:12px;border-radius:12px;text-align:center">
-<div style="font-size:12px;color:#aaa">CANCELLED</div>
+<div class="orderStatCard">
+<div class="orderStatLabel">CANCELLED</div>
 <b id="countCancelled">0</b>
 </div>
 </div>
@@ -2215,6 +3373,7 @@ style="width:100%;box-sizing:border-box;padding:13px;margin:10px 0 15px;border-r
     line-height:1.7;
     margin-top:10px;
 }
+
 </style>
 
 <div id="orders">Loading...</div>
@@ -2322,6 +3481,7 @@ style="padding:7px;margin-top:6px;border-radius:7px">
 <option ${o.status==="Confirmed"?"selected":""}>Confirmed</option>
 <option ${o.status==="Shipped"?"selected":""}>Shipped</option>
 <option ${o.status==="Delivered"?"selected":""}>Delivered</option>
+<option ${o.status==="Cancelled"?"selected":""}>Cancelled</option>
 </select>
 
 <button onclick="deleteOrder(${o.id})"
@@ -2353,11 +3513,287 @@ style="display:block;margin-top:10px;padding:8px 12px;border:0;border-radius:8px
         })
         .then(r=>r.json())
         .then(data=>{
-            alert(data.message);
+            if(data.success){
+                alert("Order #"+id+" status updated to "+status+" ✅");
+                location.reload();
+            }else{
+                alert(data.message || "Unable to update order.");
+            }
+        })
+        .catch(()=>{
+            alert("Network error. Please try again.");
         });
     }
     </script>
-    </body></html>
+    
+<script>
+/* ===== NOVALEX PREMIUM CART QUANTITY ===== */
+function changeQty(id, delta){
+    const item = cart.find(x => Number(x.id) === Number(id));
+    if(!item) return;
+
+    const stock = Number(item.stock ?? 999999);
+    const next = Number(item.qty || 1) + delta;
+
+    if(next < 1){
+        cart = cart.filter(x => Number(x.id) !== Number(id));
+    }else if(next > stock){
+        alert("Only " + stock + " item(s) available in stock.");
+        return;
+    }else{
+        item.qty = next;
+    }
+
+    localStorage.setItem("novalex_cart", JSON.stringify(cart));
+    if(typeof renderCart === "function") renderCart();
+    if(typeof updateCartCount === "function") updateCartCount();
+}
+</script>
+
+<script>
+function novaLexQtyHTML(item){
+    const id = Number(item.id);
+    const qty = Number(item.qty || 1);
+    const stock = Number(item.stock ?? 999999);
+
+    return `
+      <div class="cartQty">
+        <button type="button" onclick="changeQty(${id},-1)">−</button>
+        <span>${qty}</span>
+        <button type="button" onclick="changeQty(${id},1)"
+          ${qty >= stock ? 'disabled title="Maximum stock reached"' : ''}>+</button>
+      </div>
+      ${stock <= 0
+        ? '<div class="stockBadge stockOut">● OUT OF STOCK</div>'
+        : stock <= 3
+        ? `<div class="stockBadge stockLow">● ONLY ${stock} LEFT</div>`
+        : `<div class="stockBadge stockGood">● ${stock} IN STOCK</div>`}
+    `;
+}
+</script>
+
+<script>
+/* ===== NOVALEX LIVE ADMIN STOCK ===== */
+async function changeAdminStock(id, delta){
+    try{
+        const products = await fetch("/api/admin-products").then(r=>r.json());
+        const list = products.products || [];
+        const product = list.find(x => Number(x.id) === Number(id));
+
+        if(!product) return alert("Product not found.");
+
+        const current = Number(product.stock || 0);
+        const next = Math.max(0, current + Number(delta));
+
+        const res = await fetch("/api/product/" + id,{
+            method:"PUT",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                name:product.name,
+                price:product.price,
+                category:product.category,
+                image:product.image,
+                icon:product.icon || "",
+                stock:next
+            })
+        });
+
+        const data = await res.json();
+
+        if(!res.ok || data.success === false){
+            throw new Error(data.message || "Stock update failed");
+        }
+
+        if(typeof loadAdminProducts === "function"){
+            await loadAdminProducts();
+        }
+
+        if(typeof loadAdminStats === "function"){
+            await loadAdminStats();
+        }
+
+    }catch(e){
+        alert(e.message || "Unable to update stock.");
+    }
+}
+</script>
+
+<script>
+/* ===== NOVALEX INVENTORY DASHBOARD ===== */
+function novaLexInventoryStatus(stock){
+    stock=Number(stock||0);
+    if(stock<=0)
+        return '<span class="inventoryStatus out">● OUT OF STOCK</span>';
+    if(stock<=3)
+        return '<span class="inventoryStatus low">● LOW STOCK · '+stock+'</span>';
+    return '<span class="inventoryStatus good">● IN STOCK · '+stock+'</span>';
+}
+
+async function refreshInventoryStatus(){
+    try{
+        const r=await fetch("/api/admin-products");
+        const data=await r.json();
+        const products=data.products||[];
+
+        const low=products.filter(p=>Number(p.stock||0)>0 && Number(p.stock||0)<=3).length;
+        const out=products.filter(p=>Number(p.stock||0)<=0).length;
+
+        const lowEl=document.getElementById("lowStockCount");
+        const outEl=document.getElementById("outStockCount");
+
+        if(lowEl) lowEl.textContent=low;
+        if(outEl) outEl.textContent=out;
+    }catch(e){}
+}
+
+if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",refreshInventoryStatus);
+}else{
+    refreshInventoryStatus();
+}
+</script>
+
+<div class="inventoryBox" style="margin:15px 0">
+  <div>
+    <div class="inventoryTitle">LOW STOCK</div>
+    <div class="inventoryValue inventoryLow" id="lowStockCount">0</div>
+  </div>
+  <div>
+    <div class="inventoryTitle">OUT OF STOCK</div>
+    <div class="inventoryValue inventoryOut" id="outStockCount">0</div>
+  </div>
+</div>
+
+<script>
+/* ===== NOVALEX FINAL CHECKOUT HELPERS ===== */
+
+async function novaLexValidateCartStock(){
+    try{
+        const items=(typeof cart!=="undefined" && Array.isArray(cart)) ? cart : [];
+        if(!items.length) return {ok:false,message:"Your cart is empty."};
+
+        const res=await fetch("/api/stock-check",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({items})
+        });
+
+        const data=await res.json();
+
+        if(!res.ok || data.success===false){
+            return {ok:false,message:data.message||"Stock check failed."};
+        }
+
+        if(!data.all_available){
+            const bad=(data.items||[]).find(x=>!x.available);
+            return {
+                ok:false,
+                message:bad ? (bad.name+" — "+bad.message) : "Some items are unavailable."
+            };
+        }
+
+        return {ok:true};
+    }catch(e){
+        return {ok:false,message:"Unable to verify stock. Please try again."};
+    }
+}
+
+async function novaLexCheckoutGuard(){
+    const result=await novaLexValidateCartStock();
+
+    if(!result.ok){
+        alert(result.message);
+        if(typeof loadProducts==="function") loadProducts();
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+<script>
+/* ===== NOVALEX STORE BATCH ===== */
+function novaLexRefreshCart(){
+    try{
+        localStorage.setItem("novalex_cart",JSON.stringify(cart));
+    }catch(e){}
+    if(typeof renderCart==="function") renderCart();
+    if(typeof updateCartCount==="function") updateCartCount();
+}
+
+async function novaLexStockCheck(){
+    if(typeof cart==="undefined" || !cart.length)
+        return {ok:false,message:"Your cart is empty."};
+
+    try{
+        const r=await fetch("/api/stock-check",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({items:cart})
+        });
+        const d=await r.json();
+
+        if(!r.ok || d.success===false)
+            return {ok:false,message:d.message||"Stock verification failed."};
+
+        if(!d.all_available){
+            const x=(d.items||[]).find(i=>!i.available);
+            return {ok:false,message:x ? x.name+" — "+x.message : "Some items are unavailable."};
+        }
+
+        return {ok:true};
+    }catch(e){
+        return {ok:false,message:"Unable to verify stock."};
+    }
+}
+
+function novaLexCartTotal(){
+    if(typeof cart==="undefined") return 0;
+    return cart.reduce((sum,item)=>{
+        return sum + Number(item.price||0)*Number(item.qty||1);
+    },0);
+}
+
+function novaLexDelivery(){
+    const total=novaLexCartTotal();
+    return total>=999 ? 0 : (total>0 ? 99 : 0);
+}
+
+function novaLexGrandTotal(){
+    return novaLexCartTotal()+novaLexDelivery();
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+    if(typeof updateCartCount==="function") updateCartCount();
+});
+</script>
+
+<script>
+/* ===== NOVALEX PRODUCTION REFRESH ===== */
+
+async function novaLexRefreshAdmin(){
+    try{
+        if(typeof loadAdminStats==="function") await loadAdminStats();
+        if(typeof loadAdminProducts==="function") await loadAdminProducts();
+        if(typeof loadOrders==="function") await loadOrders();
+        if(typeof refreshInventoryStatus==="function") await refreshInventoryStatus();
+    }catch(e){}
+}
+
+function novaLexFormatMoney(value){
+    return "₹"+Number(value||0).toLocaleString("en-IN");
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+    novaLexRefreshAdmin();
+});
+
+/* Keep product/order data fresh when returning to the app */
+document.addEventListener("visibilitychange",()=>{
+    if(!document.hidden) novaLexRefreshAdmin();
+});
+</script>
+</body></html>
     """)
 
 @app.route("/admin/logout")
