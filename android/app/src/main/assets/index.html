@@ -991,6 +991,78 @@ button{font-family:inherit;cursor:pointer}
  .nx-premium-card{border-radius:17px}
 }
 </style>
+
+<style id="novalex-master-premium">
+:root{
+ --nx-bg:#070707;
+ --nx-card:#111111;
+ --nx-card2:#151515;
+ --nx-line:rgba(255,255,255,.09);
+ --nx-gold:#d7b46a;
+ --nx-text:#f7f7f7;
+ --nx-muted:#9d9d9d;
+}
+body{background:var(--nx-bg)!important;color:var(--nx-text)}
+button,.nx-btn,.btn{transition:transform .18s ease,box-shadow .18s ease,opacity .18s ease}
+button:active,.nx-btn:active,.btn:active{transform:scale(.97)}
+.nx-premium-surface{
+ background:linear-gradient(145deg,#121212,#090909);
+ border:1px solid var(--nx-line);
+ border-radius:22px;
+ box-shadow:0 14px 40px rgba(0,0,0,.28);
+}
+.nx-master-chip{
+ display:inline-flex;align-items:center;gap:7px;
+ padding:9px 13px;border:1px solid var(--nx-line);
+ border-radius:999px;background:#101010;color:#ddd;
+ font-size:12px;font-weight:600;
+}
+.nx-master-gold{color:var(--nx-gold)}
+.nx-master-divider{height:1px;background:var(--nx-line);margin:18px 0}
+.nx-ai-premium{
+ position:fixed;right:18px;bottom:86px;z-index:9998;
+ width:58px;height:58px;border-radius:50%;
+ border:1px solid rgba(215,180,106,.55);
+ background:linear-gradient(145deg,#191919,#080808);
+ color:#fff;font-weight:800;letter-spacing:.5px;
+ box-shadow:0 12px 35px rgba(0,0,0,.55);
+}
+.nx-ai-premium span{color:var(--nx-gold)}
+.nx-ai-panel{
+ position:fixed;right:14px;bottom:154px;width:min(370px,calc(100vw - 28px));
+ z-index:9999;padding:18px;border-radius:26px;
+ background:rgba(13,13,13,.97);
+ border:1px solid rgba(215,180,106,.22);
+ box-shadow:0 24px 70px rgba(0,0,0,.65);
+ backdrop-filter:blur(18px);
+ display:none;
+}
+.nx-ai-panel.open{display:block;animation:nxAIIn .22s ease}
+@keyframes nxAIIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+.nx-ai-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.nx-ai-title{font-size:17px;font-weight:800;letter-spacing:.2px}
+.nx-ai-title b{color:var(--nx-gold)}
+.nx-ai-close{border:0;background:#1a1a1a;color:#aaa;border-radius:50%;width:32px;height:32px}
+.nx-ai-sub{font-size:12px;color:var(--nx-muted);line-height:1.5;margin-bottom:15px}
+.nx-ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.nx-ai-action{
+ text-align:left;padding:13px;border-radius:16px;
+ background:#151515;border:1px solid var(--nx-line);color:#eee;
+}
+.nx-ai-action strong{display:block;font-size:13px;margin-bottom:4px}
+.nx-ai-action small{display:block;color:#888;font-size:10px;line-height:1.35}
+.nx-ai-result{
+ margin-top:13px;padding:13px;border-radius:16px;
+ background:linear-gradient(145deg,#181818,#0d0d0d);
+ border:1px solid rgba(215,180,106,.16);
+ color:#ddd;font-size:12px;line-height:1.55;display:none;
+}
+.nx-ai-result.show{display:block}
+@media(max-width:430px){
+ .nx-ai-grid{grid-template-columns:1fr}
+ .nx-ai-panel{bottom:148px}
+}
+</style>
 </head>
 
 <body>
@@ -2456,6 +2528,61 @@ document.addEventListener("DOMContentLoaded",function(){
    document.body.appendChild(t);
    setTimeout(()=>t.remove(),2200);
  };
+})();
+</script>
+
+<script id="novalex-master-ai">
+(function(){
+ if(document.getElementById("nxMasterAI")) return;
+
+ const wrap=document.createElement("div");
+ wrap.innerHTML=`
+ <button class="nx-ai-premium" id="nxAIButton" aria-label="Open NOVALEX AI">N<span>AI</span></button>
+ <section class="nx-ai-panel" id="nxAIPanel" aria-label="NOVALEX AI">
+   <div class="nx-ai-head">
+     <div class="nx-ai-title">NOVALEX <b>AI</b></div>
+     <button class="nx-ai-close" id="nxAIClose" aria-label="Close AI">×</button>
+   </div>
+   <div class="nx-ai-sub">Your private shopping assistant for style discovery, custom prints, products and orders.</div>
+   <div class="nx-ai-grid">
+     <button class="nx-ai-action" data-ai="style"><strong>✦ Find My Style</strong><small>Build a premium everyday look.</small></button>
+     <button class="nx-ai-action" data-ai="outfit"><strong>◈ Build Outfit</strong><small>Match pieces into one clean look.</small></button>
+     <button class="nx-ai-action" data-ai="custom"><strong>✎ Custom Print</strong><small>Create an original print concept.</small></button>
+     <button class="nx-ai-action" data-ai="help"><strong>⌁ Shopping Help</strong><small>Products, bag, orders or delivery.</small></button>
+   </div>
+   <div class="nx-ai-result" id="nxAIResult"></div>
+ </section>`;
+ document.body.appendChild(wrap);
+ const btn=document.getElementById("nxAIButton");
+ const panel=document.getElementById("nxAIPanel");
+ const close=document.getElementById("nxAIClose");
+ const result=document.getElementById("nxAIResult");
+
+ const answers={
+  style:"Try a clean black oversized tee with minimal NOVALEX typography, paired with neutral bottoms and one subtle statement detail.",
+  outfit:"Start with the NovaLex Oversized Tee, add the Street Cap and keep the rest minimal for a balanced premium streetwear look.",
+  custom:"Concept: a small NOVALEX mark on the front with an original geometric back graphic, using strong negative space and a premium monochrome finish.",
+  help:"I can guide you through products, categories, your bag, checkout, orders, tracking and delivery."
+ };
+
+ btn.onclick=()=>panel.classList.toggle("open");
+ close.onclick=()=>panel.classList.remove("open");
+
+ panel.querySelectorAll("[data-ai]").forEach(b=>{
+  b.onclick=()=>{
+   result.textContent=answers[b.dataset.ai];
+   result.classList.add("show");
+  };
+ });
+
+ document.addEventListener("click",e=>{
+  if(panel.classList.contains("open") && !panel.contains(e.target) && !btn.contains(e.target))
+    panel.classList.remove("open");
+ });
+
+ const meta=document.createElement("meta");
+ meta.name="theme-color";meta.content="#070707";
+ document.head.appendChild(meta);
 })();
 </script>
 </body>
