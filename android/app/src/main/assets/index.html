@@ -913,6 +913,40 @@ img{image-rendering:auto}
 input,select,textarea{border-radius:14px!important}
 ::-webkit-scrollbar{width:0;height:0}
 </style>
+
+<style id="novalex-ai-premium">
+:root{
+ --nx-bg:#050505;--nx-card:#0d0d0d;--nx-gold:#d4af37;--nx-text:#fff;
+ --nx-muted:#9a9a9a;--nx-line:rgba(255,255,255,.08)
+}
+body{background:var(--nx-bg)!important;color:var(--nx-text)!important}
+.nx-ai-fab{
+ position:fixed;right:18px;bottom:82px;z-index:9999;
+ width:58px;height:58px;border-radius:50%;
+ border:1px solid rgba(212,175,55,.55);
+ background:linear-gradient(145deg,#181818,#080808);
+ color:#d4af37;font-weight:800;font-size:12px;
+ box-shadow:0 8px 30px rgba(0,0,0,.5);
+ display:flex;align-items:center;justify-content:center;
+}
+.nx-ai-panel{
+ position:fixed;left:12px;right:12px;bottom:150px;z-index:10000;
+ background:#0b0b0b;border:1px solid rgba(212,175,55,.28);
+ border-radius:24px;padding:18px;
+ box-shadow:0 20px 60px rgba(0,0,0,.7);
+ display:none;
+}
+.nx-ai-panel.show{display:block;animation:nxup .22s ease}
+.nx-ai-title{font-size:17px;font-weight:800}
+.nx-ai-sub{font-size:12px;color:#999;margin:4px 0 14px}
+.nx-ai-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.nx-ai-action{
+ border:1px solid var(--nx-line);background:#141414;color:#fff;
+ border-radius:14px;padding:12px;text-align:left;font-size:12px
+}
+.nx-ai-action b{display:block;color:#d4af37;margin-bottom:3px}
+@keyframes nxup{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+</style>
 </head>
 
 <body>
@@ -2292,6 +2326,51 @@ setTimeout(()=>{
 },1800);
 </script>
 
+
+<script id="novalex-ai">
+(function(){
+function nxAI(){
+ let p=document.getElementById("nxAI");
+ if(p)p.classList.toggle("show");
+}
+window.nxAI=nxAI;
+window.nxAIAsk=function(type){
+ const actions={
+  style:"Try a premium black oversized tee with minimal typography.",
+  outfit:"Build a clean NOVALEX outfit around this product.",
+  custom:"Create a premium custom-print concept for me.",
+  help:"Tell me what you need help with: products, bag, orders or delivery."
+ };
+ const text=actions[type]||actions.help;
+ const box=document.getElementById("nxAIResponse");
+ if(box){box.textContent=text;box.style.display="block";}
+};
+document.addEventListener("DOMContentLoaded",function(){
+ if(document.getElementById("nxAI"))return;
+ const fab=document.createElement("button");
+ fab.className="nx-ai-fab";
+ fab.id="nxAIFab";
+ fab.textContent="AI";
+ fab.onclick=nxAI;
+
+ const panel=document.createElement("div");
+ panel.className="nx-ai-panel";
+ panel.id="nxAI";
+ panel.innerHTML=
+ '<div class="nx-ai-title">NOVALEX AI</div>'+
+ '<div class="nx-ai-sub">Your personal style assistant</div>'+
+ '<div class="nx-ai-actions">'+
+ '<button class="nx-ai-action" onclick="nxAIAsk(\\'style\\')"><b>Style</b>Find a look</button>'+
+ '<button class="nx-ai-action" onclick="nxAIAsk(\\'outfit\\')"><b>Outfit</b>Build an outfit</button>'+
+ '<button class="nx-ai-action" onclick="nxAIAsk(\\'custom\\')"><b>Custom</b>Create a print idea</button>'+
+ '<button class="nx-ai-action" onclick="nxAIAsk(\\'help\\')"><b>Help</b>App assistance</button>'+
+ '</div>'+
+ '<div id="nxAIResponse" style="display:none;margin-top:12px;padding:12px;border-radius:14px;background:#151515;color:#ddd;font-size:12px"></div>';
+ document.body.appendChild(fab);
+ document.body.appendChild(panel);
+});
+})();
+</script>
 </body>
 </html>
 
