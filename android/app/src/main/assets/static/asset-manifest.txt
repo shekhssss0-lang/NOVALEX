@@ -1,0 +1,14 @@
+NOVALEX PRODUCTION ASSETS
+static/assets/cap.jpg
+static/assets/hoodie.jpg
+static/assets/novalex-logo.png
+static/assets/tshirt.jpg
+static/catalog/cap.jpg
+static/catalog/hoodie.jpg
+static/catalog/novalex-logo.png
+static/catalog/tshirt.jpg
+static/images/cap.jpg
+static/images/hoodie.jpg
+static/images/novalex-logo.png
+static/images/tshirt.jpg
+static/ui/novalex-logo.png
