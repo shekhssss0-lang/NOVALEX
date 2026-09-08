@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#050505">
+<title>NovaLex — Premium Custom Apparel</title>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;
+ background:#08090b;
+ color:#fff;
+ font-family:Arial,Helvetica,sans-serif;
+ -webkit-tap-highlight-color:transparent;
+ overflow-x:hidden;
+}
+button{font:inherit}
+button,a{touch-action:manipulation}
+
+:root{
+ --black:#08090b;
+ --black2:#111318;
+ --gold:#d7b866;
+ --gold2:#f0d78c;
+ --white:#fff;
+ --muted:#a9adb5;
+ --line:rgba(215,184,102,.22);
+ --card:#111318;
+}
+
+.app{
+ max-width:700px;
+ margin:auto;
+ min-height:100vh;
+ background:
+ radial-gradient(circle at 50% -10%,rgba(215,184,102,.10),transparent 32%),
+ #08090b;
+ padding-bottom:78px;
+}
+
+/* HEADER */
+.header{
+ position:sticky;
+ top:0;
+ z-index:1000;
+ height:72px;
+ display:grid;
+ grid-template-columns:48px 1fr auto;
+ align-items:center;
+ padding:0 16px;
+ background:rgba(5,5,6,.96);
+ border-bottom:1px solid var(--line);
+ backdrop-filter:blur(18px);
+}
+
+.menu{
+ width:42px;height:42px;
+ border:0;background:none;color:#e7d39a;
+ display:flex;flex-direction:column;justify-content:center;gap:5px;
+}
+.menu span{width:25px;height:2px;background:#d7b866;border-radius:5px}
+
+.logo{
+ height:52px;
+ width:120px;
+ object-fit:contain;
+ justify-self:center;
+}
+
+.head-actions{
+ display:flex;
+ align-items:center;
+ gap:7px;
+}
+.icon-btn{
+ width:39px;height:39px;
+ border:0;
+ background:transparent;
+ color:#ead59b;
+ display:grid;
+ place-items:center;
+ position:relative;
+ border-radius:50%;
+}
+.icon-btn svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8}
+.badge{
+ position:absolute;
+ top:0;right:-1px;
+ min-width:16px;height:16px;
+ border-radius:10px;
+ background:#fff;
+ color:#08090b;
+ font-size:9px;
+ font-weight:800;
+ display:grid;place-items:center;
+}
+
+/* SEARCH */
+.search-wrap{
+ padding:13px 16px 8px;
+ background:#08090b;
+}
+.search{
+ height:48px;
+ border:1px solid rgba(255,255,255,.12);
+ border-radius:15px;
+ background:#15171c;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ padding:0 14px;
+}
+.search svg{width:21px;color:#cfcfcf}
+.search input{
+ flex:1;border:0;outline:0;background:none;color:#fff;
+ font-size:14px;
+}
+.search input::placeholder{color:#858993}
+
+/* LOCATION */
+.location{
+ margin:0 16px 14px;
+ padding:11px 13px;
+ background:#101217;
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:13px;
+ color:#d9d9d9;
+ font-size:12px;
+ display:flex;
+ align-items:center;
+ gap:9px;
+}
+.location strong{color:#fff}
+
+/* SECTION */
+.section{padding:10px 16px}
+.section-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:12px;
+}
+.section-title{
+ font-size:19px;
+ font-weight:800;
+ letter-spacing:-.2px;
+}
+.section-link{
+ color:var(--gold2);
+ font-size:12px;
+ font-weight:700;
+}
+
+/* DESIGN CIRCLES */
+.design-row{
+ display:flex;
+ gap:13px;
+ overflow-x:auto;
+ padding:2px 0 10px;
+ scrollbar-width:none;
+}
+.design-row::-webkit-scrollbar{display:none}
+.design{
+ min-width:82px;
+ text-align:center;
+ font-size:11px;
+ color:#e4e4e4;
+}
+.design-img{
+ width:74px;height:74px;
+ margin:auto auto 7px;
+ border-radius:50%;
+ padding:3px;
+ border:1px solid var(--gold);
+ background:#17191e;
+}
+.design-img img{
+ width:100%;height:100%;
+ object-fit:cover;border-radius:50%;
+}
+.design-name{line-height:1.25}
+
+/* HERO */
+.hero{
+ margin:4px 16px 14px;
+ min-height:260px;
+ border-radius:20px;
+ overflow:hidden;
+ position:relative;
+ border:1px solid rgba(215,184,102,.35);
+ background:
+ linear-gradient(90deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.62) 48%,rgba(0,0,0,.10) 100%),
+ url("static/images/tshirt.jpg") center/cover;
+ box-shadow:0 18px 50px rgba(0,0,0,.45);
+}
+.hero-content{
+ position:absolute;
+ inset:0;
+ padding:27px 22px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ max-width:72%;
+}
+.kicker{
+ color:var(--gold2);
+ font-size:10px;
+ font-weight:900;
+ letter-spacing:2px;
+ margin-bottom:8px;
+}
+.hero h1{
+ margin:0;
+ font-family:Georgia,serif;
+ font-size:29px;
+ line-height:1.05;
+ letter-spacing:-.5px;
+}
+.hero p{
+ margin:11px 0 16px;
+ color:#d1d1d1;
+ font-size:12px;
+ line-height:1.5;
+}
+.hero-code{
+ color:#fff;
+ font-size:12px;
+ margin-bottom:13px;
+}
+.hero-code b{color:var(--gold2)}
+.primary{
+ border:0;
+ background:#fff;
+ color:#090909;
+ border-radius:10px;
+ padding:12px 17px;
+ font-weight:800;
+ font-size:12px;
+ width:max-content;
+}
+.primary:active{transform:scale(.96)}
+
+/* DOTS */
+.dots{display:flex;justify-content:center;gap:6px;margin:9px 0 14px}
+.dot{width:6px;height:6px;border-radius:50%;background:#555}
+.dot.active{width:18px;border-radius:6px;background:var(--gold)}
+
+/* OFFER */
+.offer{
+ margin:0 16px 17px;
+ min-height:58px;
+ padding:11px 15px;
+ border:1px solid var(--line);
+ border-radius:13px;
+ background:linear-gradient(100deg,#14151a,#090a0d);
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px;
+}
+.offer small{color:#a8a8a8;font-size:10px}
+.offer strong{display:block;font-size:14px;margin-top:2px}
+.offer-code{
+ padding:8px 10px;
+ border:1px dashed var(--gold);
+ border-radius:8px;
+ color:var(--gold2);
+ font-size:10px;
+ font-weight:800;
+ white-space:nowrap;
+}
+
+/* FEATURE CARDS */
+.feature-row{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:9px;
+}
+.feature{
+ min-width:0;
+ background:#111318;
+ border:1px solid rgba(215,184,102,.55);
+ border-radius:15px;
+ overflow:hidden;
+}
+.feature img{
+ display:block;
+ width:100%;
+ aspect-ratio:1/1;
+ object-fit:cover;
+}
+.feature-info{
+ padding:9px 7px 11px;
+ text-align:center;
+}
+.feature-info b{
+ display:block;
+ font-family:Georgia,serif;
+ font-size:12px;
+ line-height:1.25;
+}
+.feature-info span{
+ display:block;
+ color:#aaa;
+ font-size:9px;
+ margin-top:4px;
+}
+
+/* LOOK */
+.look-row{
+ display:flex;
+ gap:9px;
+ overflow-x:auto;
+ scrollbar-width:none;
+}
+.look-row::-webkit-scrollbar{display:none}
+.look-card{
+ min-width:118px;
+ height:165px;
+ border-radius:14px;
+ overflow:hidden;
+ background:#15171b;
+ position:relative;
+}
+.look-card img{
+ width:100%;height:100%;object-fit:cover;
+}
+.look-card span{
+ position:absolute;
+ left:7px;right:7px;bottom:7px;
+ padding:7px;
+ border-radius:8px;
+ background:rgba(0,0,0,.68);
+ font-size:10px;
+ text-align:center;
+}
+
+/* PRODUCTS */
+.products{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+}
+.product{
+ background:#111318;
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:16px;
+ overflow:hidden;
+ position:relative;
+}
+.product-img{
+ width:100%;
+ aspect-ratio:1/1.08;
+ object-fit:cover;
+ display:block;
+ background:#eee;
+}
+.wish{
+ position:absolute;
+ top:9px;right:9px;
+ width:31px;height:31px;
+ border:0;border-radius:50%;
+ background:rgba(0,0,0,.62);
+ color:#fff;
+ display:grid;place-items:center;
+}
+.wish svg{width:17px}
+.product-info{padding:10px}
+.product-name{
+ font-size:12px;
+ font-weight:700;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+.rating{
+ margin-top:5px;
+ font-size:9px;
+ color:#bcbcbc;
+}
+.rating b{color:#e3c978}
+.price{
+ margin-top:6px;
+ display:flex;
+ align-items:center;
+ gap:6px;
+}
+.price strong{font-size:15px}
+.price del{font-size:10px;color:#777}
+.add{
+ margin-top:9px;
+ width:100%;
+ height:35px;
+ border:1px solid var(--gold);
+ background:transparent;
+ color:var(--gold2);
+ border-radius:9px;
+ font-size:11px;
+ font-weight:800;
+}
+
+/* TRUST */
+.trust{
+ margin:18px 16px;
+ padding:17px 12px;
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:16px;
+ background:#101217;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ text-align:center;
+}
+.trust-item svg{width:22px;color:var(--gold)}
+.trust-item b{display:block;font-size:10px;margin-top:7px}
+.trust-item span{display:block;color:#777;font-size:8px;margin-top:3px}
+
+/* BOTTOM NAV */
+.bottom{
+ position:fixed;
+ z-index:2000;
+ left:50%;
+ bottom:0;
+ transform:translateX(-50%);
+ width:min(700px,100%);
+ height:70px;
+ background:rgba(5,5,6,.97);
+ border-top:1px solid rgba(215,184,102,.35);
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ backdrop-filter:blur(18px);
+}
+.nav{
+ border:0;background:none;color:#777;
+ display:flex;flex-direction:column;
+ align-items:center;justify-content:center;
+ gap:4px;
+ font-size:9px;
+}
+.nav svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
+.nav.active{color:var(--gold2)}
+.nav.active svg{filter:drop-shadow(0 0 7px rgba(215,184,102,.3))}
+
+/* DRAWER */
+.drawer{
+ position:fixed;
+ inset:0;
+ z-index:3000;
+ background:rgba(0,0,0,.7);
+ visibility:hidden;
+ opacity:0;
+ transition:.25s;
+}
+.drawer.open{visibility:visible;opacity:1}
+.drawer-panel{
+ width:82%;
+ max-width:360px;
+ height:100%;
+ background:#0c0d10;
+ border-right:1px solid var(--line);
+ padding:28px 20px;
+ transform:translateX(-100%);
+ transition:.3s;
+}
+.drawer.open .drawer-panel{transform:none}
+.drawer-logo{width:120px;height:70px;object-fit:contain;margin-bottom:25px}
+.drawer-link{
+ display:flex;
+ align-items:center;
+ gap:13px;
+ width:100%;
+ border:0;
+ background:none;
+ color:#ddd;
+ padding:15px 4px;
+ border-bottom:1px solid rgba(255,255,255,.06);
+ text-align:left;
+ font-size:14px;
+}
+.drawer-link svg{width:21px;color:var(--gold)}
+
+.fade-up{
+ animation:fadeUp .55s ease both;
+}
+@keyframes fadeUp{
+ from{opacity:0;transform:translateY(12px)}
+ to{opacity:1;transform:none}
+}
+@media(max-width:380px){
+ .head-actions{gap:1px}
+ .header{padding:0 9px}
+ .hero h1{font-size:25px}
+ .feature-info b{font-size:10px}
+}
+</style>
+
+<style id="novalex-shop-ui">
+
+.nx-page{
+ position:fixed;
+ inset:0;
+ z-index:2500;
+ background:#08090b;
+ overflow-y:auto;
+ transform:translateX(100%);
+ transition:transform .32s cubic-bezier(.2,.8,.2,1);
+ padding-bottom:84px;
+}
+.nx-page.open{transform:translateX(0)}
+
+.nx-page-head{
+ position:sticky;
+ top:0;
+ z-index:20;
+ height:68px;
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:0 15px;
+ background:rgba(7,7,8,.97);
+ border-bottom:1px solid rgba(215,184,102,.22);
+ backdrop-filter:blur(16px);
+}
+
+.nx-back{
+ width:40px;
+ height:40px;
+ border:0;
+ border-radius:50%;
+ background:#15161a;
+ color:#e5cc8c;
+ display:grid;
+ place-items:center;
+}
+.nx-back svg{width:21px;height:21px}
+
+.nx-page-logo{
+ width:92px;
+ height:45px;
+ object-fit:contain;
+ margin:auto;
+}
+
+.nx-page-title{
+ font-size:17px;
+ font-weight:800;
+ color:#fff;
+}
+
+.nx-head-spacer{
+ width:40px;
+}
+
+.nx-shop-search{
+ margin:14px 15px 10px;
+ height:46px;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ padding:0 13px;
+ background:#15171c;
+ border:1px solid rgba(255,255,255,.10);
+ border-radius:13px;
+}
+.nx-shop-search svg{
+ width:20px;
+ color:#aaa;
+}
+.nx-shop-search input{
+ flex:1;
+ min-width:0;
+ border:0;
+ outline:0;
+ background:none;
+ color:#fff;
+ font-size:13px;
+}
+
+.nx-cat-strip{
+ display:flex;
+ gap:9px;
+ overflow-x:auto;
+ padding:7px 15px 14px;
+ scrollbar-width:none;
+}
+.nx-cat-strip::-webkit-scrollbar{display:none}
+
+.nx-cat{
+ flex:0 0 auto;
+ padding:10px 15px;
+ border-radius:22px;
+ border:1px solid rgba(255,255,255,.12);
+ background:#111318;
+ color:#aaa;
+ font-size:11px;
+ font-weight:700;
+}
+.nx-cat.active{
+ background:#e5cc8c;
+ border-color:#e5cc8c;
+ color:#080808;
+}
+
+.nx-shop-banner{
+ margin:0 15px 15px;
+ min-height:105px;
+ border-radius:16px;
+ padding:18px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ background:
+ linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.32)),
+ url("static/images/tshirt.jpg") center/cover;
+ border:1px solid rgba(215,184,102,.30);
+}
+.nx-shop-banner small{
+ color:#d7b866;
+ font-size:9px;
+ font-weight:900;
+ letter-spacing:1.5px;
+}
+.nx-shop-banner b{
+ margin-top:6px;
+ font-family:Georgia,serif;
+ font-size:21px;
+}
+.nx-shop-banner span{
+ margin-top:5px;
+ color:#aaa;
+ font-size:10px;
+}
+
+.nx-tools{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 15px 12px;
+}
+.nx-result-count{
+ color:#888;
+ font-size:11px;
+}
+.nx-tool-buttons{
+ display:flex;
+ gap:7px;
+}
+.nx-tool{
+ border:1px solid rgba(255,255,255,.12);
+ background:#111318;
+ color:#ddd;
+ border-radius:9px;
+ padding:8px 11px;
+ font-size:10px;
+}
+
+.nx-shop-grid{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:11px;
+ padding:0 15px;
+}
+
+.nx-shop-product{
+ background:#111318;
+ border:1px solid rgba(255,255,255,.075);
+ border-radius:15px;
+ overflow:hidden;
+ position:relative;
+}
+.nx-shop-product-img{
+ width:100%;
+ aspect-ratio:1/1.08;
+ object-fit:cover;
+ display:block;
+ background:#eee;
+}
+.nx-shop-wish{
+ position:absolute;
+ right:8px;
+ top:8px;
+ width:32px;
+ height:32px;
+ border:0;
+ border-radius:50%;
+ background:rgba(0,0,0,.68);
+ color:#fff;
+ display:grid;
+ place-items:center;
+}
+.nx-shop-wish svg{width:17px}
+
+.nx-shop-info{padding:10px}
+.nx-shop-name{
+ font-size:12px;
+ font-weight:800;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+}
+.nx-shop-rating{
+ margin-top:5px;
+ font-size:9px;
+ color:#999;
+}
+.nx-shop-rating b{color:#dfc978}
+.nx-shop-price{
+ margin-top:6px;
+ display:flex;
+ gap:7px;
+ align-items:center;
+}
+.nx-shop-price strong{font-size:15px}
+.nx-shop-price del{font-size:9px;color:#777}
+
+.nx-view-product{
+ margin-top:9px;
+ width:100%;
+ height:34px;
+ border:1px solid #d7b866;
+ background:transparent;
+ color:#e5cc8c;
+ border-radius:8px;
+ font-size:10px;
+ font-weight:800;
+}
+
+.nx-empty{
+ grid-column:1/-1;
+ text-align:center;
+ padding:55px 20px;
+ color:#777;
+}
+.nx-empty b{
+ display:block;
+ color:#ddd;
+ margin-bottom:6px;
+}
+
+@media(max-width:360px){
+ .nx-shop-grid{gap:8px;padding:0 10px}
+ .nx-cat-strip{padding-left:10px;padding-right:10px}
+ .nx-shop-search,.nx-shop-banner{margin-left:10px;margin-right:10px}
+ .nx-tools{padding-left:10px;padding-right:10px}
+}
+
+</style>
+
+
+<style>
+.nx-product-page{background:#080808;overflow-y:auto;padding-bottom:100px}
+.nx-product-wrap{max-width:760px;margin:auto}
+.nx-product-image-box{position:relative;margin:14px;border-radius:24px;overflow:hidden;background:#111;border:1px solid rgba(212,175,55,.18)}
+.nx-product-main-img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}
+.nx-product-wish{position:absolute;right:16px;top:16px;width:46px;height:46px;border:1px solid rgba(212,175,55,.35);border-radius:50%;background:rgba(0,0,0,.72);color:#fff;display:grid;place-items:center}
+.nx-product-wish svg{width:22px;height:22px}
+.nx-product-body{padding:4px 18px}
+.nx-product-category{font-size:11px;letter-spacing:2px;color:#c9a84b;text-transform:uppercase;margin-top:10px}
+.nx-product-title{font-size:26px;font-weight:800;line-height:1.2;margin:7px 0}
+.nx-product-rating{display:inline-flex;align-items:center;gap:7px;background:#171717;border:1px solid #292929;border-radius:8px;padding:7px 10px;font-size:13px;margin:5px 0 13px}
+.nx-product-rating b{color:#d8b34d}
+.nx-product-price-row{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.nx-product-price{font-size:27px;font-weight:900}
+.nx-product-old{color:#777;text-decoration:line-through}
+.nx-product-save{font-size:12px;color:#d8b34d}
+.nx-product-line{height:1px;background:#222;margin:18px 0}
+.nx-detail-label{font-size:13px;font-weight:800;margin-bottom:10px}
+.nx-size-row{display:flex;gap:9px;flex-wrap:wrap}
+.nx-size{min-width:48px;height:42px;border-radius:10px;border:1px solid #333;background:#111;color:#eee;font-weight:700}
+.nx-size.active{border-color:#d8b34d;background:#d8b34d;color:#090909}
+.nx-qty{display:flex;align-items:center;width:max-content;border:1px solid #333;border-radius:11px;overflow:hidden;background:#111}
+.nx-qty button{width:42px;height:40px;border:0;background:transparent;color:#fff;font-size:20px}
+.nx-qty span{width:38px;text-align:center;font-weight:800}
+.nx-offer{padding:13px;border:1px solid #292929;background:#111;border-radius:14px;margin:10px 0}
+.nx-offer b{display:block;font-size:13px;margin-bottom:4px}
+.nx-offer span{font-size:12px;color:#999}
+.nx-delivery{display:grid;grid-template-columns:30px 1fr;gap:10px;padding:14px;border:1px solid #292929;border-radius:14px;background:#101010}
+.nx-delivery-icon{color:#d8b34d;font-size:20px}
+.nx-delivery b{font-size:13px}.nx-delivery span{display:block;color:#888;font-size:12px;margin-top:3px}
+.nx-product-actions{display:grid;grid-template-columns:1fr 1.2fr;gap:10px;margin:18px 0}
+.nx-action{height:52px;border-radius:13px;font-weight:900;letter-spacing:.3px}
+.nx-add{background:#161616;color:#fff;border:1px solid #d8b34d}
+.nx-buy{background:#d8b34d;color:#080808;border:1px solid #d8b34d}
+.nx-related-title{font-size:18px;font-weight:900;margin:22px 0 12px}
+.nx-related{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.nx-related-card{background:#111;border:1px solid #222;border-radius:15px;overflow:hidden}
+.nx-related-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.nx-related-card div{padding:10px;font-size:13px;font-weight:800}
+@media(min-width:650px){.nx-product-wrap{padding:0 12px}.nx-related{grid-template-columns:repeat(4,1fr)}}
+</style>
+
+
+<style>
+.nx-bag-page{background:#080808;overflow-y:auto;padding-bottom:100px}
+.nx-bag-content{max-width:760px;margin:auto;padding:10px 14px}
+.nx-bag-item{display:grid;grid-template-columns:92px 1fr auto;gap:12px;padding:12px;background:#111;border:1px solid #252525;border-radius:17px;margin-bottom:10px}
+.nx-bag-img{width:92px;height:110px;border-radius:12px;object-fit:cover;background:#181818}
+.nx-bag-name{font-size:14px;font-weight:800;line-height:1.3}
+.nx-bag-meta{font-size:11px;color:#888;margin-top:6px}
+.nx-bag-price{font-size:16px;font-weight:900;margin-top:8px}
+.nx-bag-remove{background:none;border:0;color:#777;font-size:11px;padding:5px 0}
+.nx-bag-controls{display:flex;align-items:center;gap:7px;margin-top:9px}
+.nx-bag-controls button{width:29px;height:29px;border:1px solid #333;background:#171717;color:#fff;border-radius:8px}
+.nx-bag-controls span{min-width:20px;text-align:center;font-size:12px;font-weight:800}
+.nx-bag-summary{margin-top:16px;padding:16px;background:#101010;border:1px solid #292929;border-radius:18px}
+.nx-summary-title{font-size:17px;font-weight:900;margin-bottom:14px}
+.nx-summary-row{display:flex;justify-content:space-between;padding:7px 0;color:#aaa;font-size:13px}
+.nx-summary-row.total{border-top:1px solid #292929;margin-top:7px;padding-top:13px;color:#fff;font-size:18px;font-weight:900}
+.nx-summary-row.total strong{color:#d8b34d}
+.nx-free-note{font-size:11px;color:#d8b34d;background:#17140b;border:1px solid #3a3016;padding:10px;border-radius:10px;margin:8px 0}
+.nx-checkout-btn{width:100%;height:52px;border:0;border-radius:13px;background:#d8b34d;color:#080808;font-weight:900;font-size:14px;margin-top:13px}
+.nx-continue-btn{width:100%;height:45px;border:1px solid #333;border-radius:13px;background:#111;color:#fff;font-weight:800;margin-top:9px}
+.nx-empty-bag{text-align:center;padding:65px 20px;color:#777}
+.nx-empty-bag-icon{font-size:46px;margin-bottom:12px}
+.nx-empty-bag b{display:block;color:#fff;font-size:20px;margin-bottom:6px}
+</style>
+
+
+<style>
+.nx-checkout-page{background:#080808;overflow-y:auto;padding-bottom:100px}
+.nx-checkout-content{max-width:760px;margin:auto;padding:10px 14px}
+.nx-co-card{background:#101010;border:1px solid #272727;border-radius:18px;padding:16px;margin-bottom:12px}
+.nx-co-title{font-size:16px;font-weight:900;margin-bottom:13px}
+.nx-co-label{font-size:11px;color:#999;display:block;margin:10px 0 6px}
+.nx-co-input,.nx-co-textarea{width:100%;box-sizing:border-box;background:#171717;color:#fff;border:1px solid #333;border-radius:11px;padding:13px;font:inherit;outline:none}
+.nx-co-input:focus,.nx-co-textarea:focus{border-color:#d8b34d}
+.nx-co-textarea{min-height:78px;resize:none}
+.nx-co-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.nx-payment{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid #292929;background:#151515;border-radius:12px;margin:8px 0}
+.nx-payment input{accent-color:#d8b34d}
+.nx-payment b{font-size:13px}.nx-payment span{display:block;color:#888;font-size:11px;margin-top:2px}
+.nx-coupon{display:flex;gap:8px}.nx-coupon input{flex:1}
+.nx-coupon button{padding:0 16px;border:1px solid #d8b34d;border-radius:11px;background:#171717;color:#d8b34d;font-weight:800}
+.nx-applied{font-size:11px;color:#d8b34d;margin-top:8px}
+.nx-co-row{display:flex;justify-content:space-between;padding:7px 0;color:#aaa;font-size:13px}
+.nx-co-row.total{border-top:1px solid #292929;margin-top:7px;padding-top:13px;color:#fff;font-size:19px;font-weight:900}
+.nx-co-row.total strong{color:#d8b34d}
+.nx-place-order{width:100%;height:53px;border:0;border-radius:13px;background:#d8b34d;color:#080808;font-weight:900;font-size:14px;margin-top:12px}
+.nx-secure{font-size:11px;text-align:center;color:#777;margin:12px 0}
+</style>
+
+
+<style>
+.nx-orders-page{background:#080808;overflow-y:auto;padding-bottom:100px}
+.nx-orders-content{max-width:760px;margin:auto;padding:10px 14px}
+.nx-order-card{background:#101010;border:1px solid #292929;border-radius:18px;padding:15px;margin-bottom:12px}
+.nx-order-top{display:flex;justify-content:space-between;gap:10px}
+.nx-order-id{font-size:14px;font-weight:900}
+.nx-order-date{font-size:10px;color:#777;margin-top:4px}
+.nx-order-status{font-size:11px;color:#d8b34d;border:1px solid #4a3b17;background:#17140b;border-radius:20px;padding:6px 9px;height:max-content}
+.nx-order-products{display:flex;gap:8px;overflow:hidden;margin:14px 0}
+.nx-order-thumb{width:62px;height:68px;border-radius:10px;object-fit:cover;background:#181818}
+.nx-order-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #252525;padding-top:12px}
+.nx-order-total{font-size:16px;font-weight:900}
+.nx-track-btn{border:1px solid #d8b34d;background:#171717;color:#d8b34d;border-radius:10px;padding:9px 12px;font-size:11px;font-weight:900}
+.nx-empty-orders{text-align:center;padding:70px 20px;color:#777}
+.nx-empty-orders b{display:block;color:#fff;font-size:20px;margin-bottom:7px}
+.nx-track-card{background:#101010;border:1px solid #292929;border-radius:18px;padding:17px;margin-top:12px}
+.nx-track-head{display:flex;justify-content:space-between;align-items:center}
+.nx-track-head b{font-size:16px}
+.nx-track-head span{font-size:11px;color:#d8b34d}
+.nx-track-line{position:relative;margin:22px 4px 8px;padding-left:26px}
+.nx-track-step{position:relative;padding-bottom:25px}
+.nx-track-step:last-child{padding-bottom:0}
+.nx-track-step:before{content:"";position:absolute;left:-22px;top:2px;width:10px;height:10px;border-radius:50%;background:#333;border:2px solid #555}
+.nx-track-step:after{content:"";position:absolute;left:-17px;top:16px;width:2px;height:calc(100% - 6px);background:#333}
+.nx-track-step:last-child:after{display:none}
+.nx-track-step.active:before{background:#d8b34d;border-color:#d8b34d}
+.nx-track-step.active:after{background:#d8b34d}
+.nx-track-step b{font-size:13px}
+.nx-track-step span{display:block;color:#777;font-size:11px;margin-top:3px}
+.nx-back-orders{width:100%;height:45px;margin-top:12px;border:1px solid #333;background:#111;color:#fff;border-radius:12px;font-weight:800}
+</style>
+
+
+<style>
+.nx-wishlist-page,.nx-profile-page{background:#080808;overflow-y:auto;padding-bottom:100px}
+.nx-wishlist-content,.nx-profile-content{max-width:760px;margin:auto;padding:12px 14px}
+.nx-wish-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+.nx-wish-card{position:relative;background:#111;border:1px solid #252525;border-radius:16px;overflow:hidden}
+.nx-wish-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.nx-wish-info{padding:11px}.nx-wish-name{font-size:13px;font-weight:800}
+.nx-wish-price{font-size:15px;font-weight:900;color:#d8b34d;margin-top:5px}
+.nx-wish-open{width:100%;margin-top:9px;height:37px;border:1px solid #333;background:#171717;color:#fff;border-radius:9px;font-size:10px;font-weight:900}
+.nx-wish-remove{position:absolute;right:9px;top:9px;width:32px;height:32px;border:1px solid #444;border-radius:50%;background:#090909;color:#fff}
+.nx-profile-hero{text-align:center;padding:25px 10px}
+.nx-profile-avatar{width:76px;height:76px;border-radius:50%;margin:auto;display:grid;place-items:center;background:#171717;border:1px solid #d8b34d;color:#d8b34d;font-size:29px;font-weight:900}
+.nx-profile-hero h2{margin:11px 0 4px;font-size:21px}
+.nx-profile-hero p{margin:0;color:#777;font-size:12px}
+.nx-profile-menu{background:#101010;border:1px solid #282828;border-radius:17px;overflow:hidden}
+.nx-profile-row{width:100%;display:flex;align-items:center;gap:13px;padding:16px;border:0;border-bottom:1px solid #252525;background:transparent;color:#fff;text-align:left}
+.nx-profile-row:last-child{border-bottom:0}
+.nx-profile-row .ico{width:30px;text-align:center;color:#d8b34d;font-size:18px}
+.nx-profile-row b{font-size:13px}.nx-profile-row span{display:block;color:#777;font-size:10px;margin-top:3px}
+.nx-profile-row .arrow{margin-left:auto;color:#666}
+.nx-profile-form{display:none;margin-top:12px;background:#101010;border:1px solid #282828;border-radius:17px;padding:15px}
+.nx-profile-form.open{display:block}
+.nx-profile-input{width:100%;box-sizing:border-box;background:#171717;color:#fff;border:1px solid #333;border-radius:10px;padding:12px;margin:5px 0 10px}
+.nx-profile-save{width:100%;height:45px;border:0;border-radius:11px;background:#d8b34d;color:#080808;font-weight:900}
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+<button class="menu" onclick="openDrawer()" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+
+<img class="logo" src="static/images/novalex-logo.png" alt="NovaLex">
+
+<div class="head-actions">
+<button class="icon-btn" onclick="focusSearch()">
+<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 5 5"></path></svg>
+</button>
+<button class="icon-btn" onclick="notify('Wishlist','Your saved NovaLex styles are here.')">
+<svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 5-8.8 10.2-8.8 10.2S3.2 13.6 3.2 8.6A5 5 0 0 1 12 5.3a5 5 0 0 1 8.8 3.3Z"></path></svg>
+</button>
+<button class="icon-btn" onclick="notify('NovaLex Alerts','New drops and offers will appear here.')">
+<svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path><path d="M10 21h4"></path></svg>
+</button>
+<button class="icon-btn" onclick="notify('Your Bag','Your selected products will appear here.')">
+<svg viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8Z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg>
+<span class="badge" id="bagCount">0</span>
+</button>
+</div>
+</header>
+
+<div class="search-wrap">
+<div class="search">
+<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 5 5"></path></svg>
+<input id="search" placeholder="Search T-shirts, hoodies, custom prints..." oninput="searchProducts(this.value)">
+</div>
+</div>
+
+<div class="location">
+<svg width="17" viewBox="0 0 24 24" fill="none" stroke="#d7b866" stroke-width="1.8">
+<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+<circle cx="12" cy="10" r="2.5"></circle>
+</svg>
+<span>Deliver to <strong>your location</strong></span>
+<span style="margin-left:auto">⌄</span>
+</div>
+
+<section class="section fade-up">
+<div class="section-head">
+<div class="section-title">Explore Designs</div>
+<div class="section-link">See All</div>
+</div>
+
+<div class="design-row">
+<div class="design"><div class="design-img"><img src="static/images/tshirt.jpg"></div><div class="design-name">Graphic<br>Tees</div></div>
+<div class="design"><div class="design-img"><img src="static/images/tshirt.jpg"></div><div class="design-name">Minimalist<br>Art</div></div>
+<div class="design"><div class="design-img"><img src="static/images/tshirt.jpg"></div><div class="design-name">Team<br>Merch</div></div>
+<div class="design"><div class="design-img"><img src="static/images/tshirt.jpg"></div><div class="design-name">Custom<br>Photos</div></div>
+<div class="design"><div class="design-img"><img src="static/images/tshirt.jpg"></div><div class="design-name">Personalized<br>Text</div></div>
+<div class="design"><div class="design-img"><img src="static/images/tshirt.jpg"></div><div class="design-name">Special<br>Occasions</div></div>
+</div>
+</section>
+
+<section class="hero fade-up">
+<div class="hero-content">
+<div class="kicker">NOVAPREMIER CUSTOM APPAREL</div>
+<h1>Express<br>Your Style</h1>
+<p>Premium custom apparel made to match your personality.</p>
+<div class="hero-code">Use Code: <b>NOVAPRINT20</b></div>
+<button class="primary" onclick="shopNow()">SHOP NOW</button>
+</div>
+</section>
+
+<div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+
+<div class="offer">
+<div><small>LIMITED TIME OFFER</small><strong>Extra savings on premium orders</strong></div>
+<div class="offer-code">NOVA10</div>
+</div>
+
+<section class="section">
+<div class="section-head">
+<div class="section-title">Create Your Look</div>
+<div class="section-link">Explore</div>
+</div>
+
+<div class="feature-row">
+<div class="feature">
+<img src="static/images/tshirt.jpg">
+<div class="feature-info"><b>Editor's Picks</b><span>Premium Tees</span></div>
+</div>
+<div class="feature">
+<img src="static/images/hoodie.jpg">
+<div class="feature-info"><b>Premium Print</b><span>Quality First</span></div>
+</div>
+<div class="feature">
+<img src="static/images/cap.jpg">
+<div class="feature-info"><b>Design Your Tee</b><span>Make It Yours</span></div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-head">
+<div>
+<div class="section-link" style="margin-bottom:3px">SHOP THE LOOK</div>
+<div class="section-title">Custom Styles in Action</div>
+</div>
+<div class="section-link">View All</div>
+</div>
+
+<div class="look-row">
+<div class="look-card"><img src="static/images/tshirt.jpg"><span>Classic Collection</span></div>
+<div class="look-card"><img src="static/images/hoodie.jpg"><span>Premium Hoodie</span></div>
+<div class="look-card"><img src="static/images/cap.jpg"><span>Street Style</span></div>
+<div class="look-card"><img src="static/images/tshirt.jpg"><span>Custom Print</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-head">
+<div class="section-title">Trending Now</div>
+<div class="section-link">See All</div>
+</div>
+
+<div class="products" id="products"></div>
+</section>
+
+<div class="trust">
+<div class="trust-item">
+<svg viewBox="0 0 24 24"><path d="M3 7h11v10H3z"></path><path d="M14 10h4l3 3v4h-7z"></path><circle cx="7" cy="19" r="2"></circle><circle cx="18" cy="19" r="2"></circle></svg>
+<b>Fast Delivery</b><span>Reliable shipping</span>
+</div>
+<div class="trust-item">
+<svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"></path><path d="m8 12 2.5 2.5L16 9"></path></svg>
+<b>Secure Payment</b><span>Safe checkout</span>
+</div>
+<div class="trust-item">
+<svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66"></path><path d="M20 4v6h-6"></path></svg>
+<b>Easy Support</b><span>We're here to help</span>
+</div>
+</div>
+
+</div>
+
+
+<!-- NOVALEX DEDICATED SHOP PAGE -->
+<section id="nxShopPage" class="nx-page">
+
+ <div class="nx-page-head">
+   <button class="nx-back" onclick="closeShop()" aria-label="Back">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+       <path d="M19 12H5"></path>
+       <path d="m12 19-7-7 7-7"></path>
+     </svg>
+   </button>
+
+   <div class="nx-page-title">Shop</div>
+
+   <img class="nx-page-logo"
+        src="static/images/novalex-logo.png"
+        alt="NovaLex">
+
+   <div class="nx-head-spacer"></div>
+ </div>
+
+ <div class="nx-shop-search">
+   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+     <circle cx="11" cy="11" r="7"></circle>
+     <path d="m16.5 16.5 5 5"></path>
+   </svg>
+   <input id="nxShopSearch"
+          placeholder="Search products..."
+          oninput="filterShop(this.value)">
+ </div>
+
+ <div class="nx-cat-strip">
+   <button class="nx-cat active" onclick="setCategory('All',this)">All</button>
+   <button class="nx-cat" onclick="setCategory('T-Shirts',this)">T-Shirts</button>
+   <button class="nx-cat" onclick="setCategory('Hoodies',this)">Hoodies</button>
+   <button class="nx-cat" onclick="setCategory('Caps',this)">Caps</button>
+   <button class="nx-cat" onclick="setCategory('Custom',this)">Custom</button>
+ </div>
+
+ <div class="nx-shop-banner">
+   <small>NOVALEX PREMIUM COLLECTION</small>
+   <b>Wear Your Identity.</b>
+   <span>Premium custom apparel made for your style.</span>
+ </div>
+
+ <div class="nx-tools">
+   <span class="nx-result-count" id="nxResultCount">4 products</span>
+
+   <div class="nx-tool-buttons">
+     <button class="nx-tool" onclick="sortShop('price')">Price</button>
+     <button class="nx-tool" onclick="sortShop('name')">Sort</button>
+   </div>
+ </div>
+
+ <div class="nx-shop-grid" id="nxShopGrid"></div>
+
+</section>
+
+
+<!-- NOVALEX PRODUCT DETAILS PAGE -->
+<section id="nxProductPage" class="nx-page nx-product-page">
+  <div class="nx-page-head">
+    <button class="nx-back" onclick="closeProduct()" aria-label="Back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path>
+      </svg>
+    </button>
+    <div class="nx-page-title">Product</div>
+    <img class="nx-page-logo" src="static/images/novalex-logo.png" alt="NovaLex">
+    <div class="nx-head-spacer"></div>
+  </div>
+
+  <div id="nxProductContent"></div>
+</section>
+
+
+<!-- NOVALEX BAG PAGE -->
+<section id="nxBagPage" class="nx-page nx-bag-page">
+  <div class="nx-page-head">
+    <button class="nx-back" onclick="closeBag()" aria-label="Back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path>
+      </svg>
+    </button>
+    <div class="nx-page-title">My Bag</div>
+    <img class="nx-page-logo" src="static/images/novalex-logo.png" alt="NovaLex">
+    <div class="nx-head-spacer"></div>
+  </div>
+
+  <div id="nxBagContent" class="nx-bag-content"></div>
+</section>
+
+
+<!-- NOVALEX CHECKOUT PAGE -->
+<section id="nxCheckoutPage" class="nx-page nx-checkout-page">
+  <div class="nx-page-head">
+    <button class="nx-back" onclick="closeCheckout()" aria-label="Back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path>
+      </svg>
+    </button>
+    <div class="nx-page-title">Checkout</div>
+    <img class="nx-page-logo" src="static/images/novalex-logo.png" alt="NovaLex">
+    <div class="nx-head-spacer"></div>
+  </div>
+
+  <div class="nx-checkout-content" id="nxCheckoutContent"></div>
+</section>
+
+
+<!-- NOVALEX MY ORDERS PAGE -->
+<section id="nxOrdersPage" class="nx-page nx-orders-page">
+  <div class="nx-page-head">
+    <button class="nx-back" onclick="closeOrders()" aria-label="Back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path>
+      </svg>
+    </button>
+    <div class="nx-page-title">My Orders</div>
+    <img class="nx-page-logo" src="static/images/novalex-logo.png" alt="NovaLex">
+    <div class="nx-head-spacer"></div>
+  </div>
+  <div id="nxOrdersContent" class="nx-orders-content"></div>
+</section>
+
+
+<!-- NOVALEX WISHLIST PAGE -->
+<section id="nxWishlistPage" class="nx-page nx-wishlist-page">
+  <div class="nx-page-head">
+    <button class="nx-back" onclick="closeWishlist()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path>
+      </svg>
+    </button>
+    <div class="nx-page-title">Wishlist</div>
+    <img class="nx-page-logo" src="static/images/novalex-logo.png" alt="NovaLex">
+    <div class="nx-head-spacer"></div>
+  </div>
+  <div id="nxWishlistContent" class="nx-wishlist-content"></div>
+</section>
+
+<!-- NOVALEX PROFILE PAGE -->
+<section id="nxProfilePage" class="nx-page nx-profile-page">
+  <div class="nx-page-head">
+    <button class="nx-back" onclick="closeProfile()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path>
+      </svg>
+    </button>
+    <div class="nx-page-title">Profile</div>
+    <img class="nx-page-logo" src="static/images/novalex-logo.png" alt="NovaLex">
+    <div class="nx-head-spacer"></div>
+  </div>
+  <div class="nx-profile-content" id="nxProfileContent"></div>
+</section>
+
+<!-- DRAWER -->
+<div class="drawer" id="drawer" onclick="closeDrawer(event)">
+<div class="drawer-panel">
+<img class="drawer-logo" src="static/images/novalex-logo.png">
+<button class="drawer-link"><svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8"></path><path d="M5 10v10h14V10"></path></svg>Home</button>
+<button class="drawer-link" onclick="shopNow()"><svg viewBox="0 0 24 24"><path d="M4 5h6v6H4zM14 5h6v6h-6zM4 15h6v6H4zM14 15h6v6h-6z"></path></svg>Categories</button>
+<button class="drawer-link" onclick="closeDrawer();openWishlist()"><svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 5-8.8 10.2-8.8 10.2S3.2 13.6 3.2 8.6A5 5 0 0 1 12 5.3a5 5 0 0 1 8.8 3.3Z"></path></svg>Wishlist</button>
+<button class="drawer-link" onclick="closeDrawer();openBag()"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8Z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg>My Bag</button>
+<button class="drawer-link" onclick="closeDrawer();openOrders()"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"></path><path d="M8 9h8M8 13h6"></path></svg>My Orders</button>
+<button class="drawer-link"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c.8-4 3.5-6 8-6s7.2 2 8 6"></path></svg>Profile</button>
+</div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom">
+<button class="nav active" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+<svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v9H3z"></path></svg>Home
+</button>
+<button class="nav" onclick="openShop()">
+<svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path></svg>Categories
+</button>
+<button class="nav" onclick="notify('NovaLex Trends','Trending styles are coming soon.')">
+<svg viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-9"></path><path d="M17 6h4v4"></path></svg>Trends
+</button>
+<button class="nav" onclick="openOrders()">
+<svg viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8Z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg>My Orders
+</button>
+<button class="nav" onclick="openProfile()">
+<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c.8-4 3.5-6 8-6s7.2 2 8 6"></path></svg>Profile
+</button>
+</nav>
+
+<script>
+const products=[
+ {id:1,name:"NovaLex Classic Tee",category:"T-Shirts",price:799,old:999,image:"static/images/tshirt.jpg",rating:"4.8"},
+ {id:2,name:"NovaLex Oversized Tee",category:"T-Shirts",price:999,old:1299,image:"static/images/tshirt.jpg",rating:"4.9"},
+ {id:3,name:"NovaLex Premium Hoodie",category:"Hoodies",price:1499,old:1899,image:"static/images/hoodie.jpg",rating:"4.9"},
+ {id:4,name:"NovaLex Street Cap",category:"Caps",price:499,old:699,image:"static/images/cap.jpg",rating:"4.7"}
+];
+
+let bag=JSON.parse(localStorage.getItem("novalex_bag")||"[]");
+
+
+let shopCategory="All";
+let shopSearch="";
+let shopSort="default";
+
+
+
+function openBag(){
+  document.getElementById("nxBagPage").classList.add("open");
+  renderBag();
+}
+
+function closeBag(){
+  document.getElementById("nxBagPage").classList.remove("open");
+}
+
+function bagChangeQty(key,amount){
+  const item=bag.find(x=>x.key===key);
+  if(!item)return;
+  item.qty=Math.max(1,Math.min(10,(item.qty||1)+amount));
+  localStorage.setItem("novalex_bag",JSON.stringify(bag));
+  updateBagCount();
+  renderBag();
+}
+
+function bagRemove(key){
+  bag=bag.filter(x=>x.key!==key);
+  localStorage.setItem("novalex_bag",JSON.stringify(bag));
+  updateBagCount();
+  renderBag();
+  notify("Bag Updated","Item removed from your bag.");
+}
+
+function renderBag(){
+  const el=document.getElementById("nxBagContent");
+  if(!el)return;
+
+  if(!bag.length){
+    el.innerHTML=`
+      <div class="nx-empty-bag">
+        <div class="nx-empty-bag-icon">🛍</div>
+        <b>Your bag is empty</b>
+        <span>Add something you love from NovaLex.</span>
+        <button class="nx-continue-btn" onclick="closeBag();openShop()">CONTINUE SHOPPING</button>
+      </div>`;
+    return;
+  }
+
+  let subtotal=bag.reduce((sum,x)=>sum+(x.price*x.qty),0);
+  let delivery=subtotal>=999?0:99;
+  let total=subtotal+delivery;
+
+  el.innerHTML=`
+    <div class="nx-bag-items">
+      ${bag.map(x=>`
+        <article class="nx-bag-item">
+          <img class="nx-bag-img" src="${x.image}" alt="${x.name}">
+          <div>
+            <div class="nx-bag-name">${x.name}</div>
+            <div class="nx-bag-meta">Size: ${x.size||"One Size"}</div>
+            <div class="nx-bag-price">₹${x.price}</div>
+            <div class="nx-bag-controls">
+              <button onclick="bagChangeQty('${x.key}',-1)">−</button>
+              <span>${x.qty}</span>
+              <button onclick="bagChangeQty('${x.key}',1)">+</button>
+            </div>
+            <button class="nx-bag-remove" onclick="bagRemove('${x.key}')">Remove</button>
+          </div>
+          <strong>₹${x.price*x.qty}</strong>
+        </article>
+      `).join("")}
+    </div>
+
+    <div class="nx-bag-summary">
+      <div class="nx-summary-title">Order Summary</div>
+      <div class="nx-summary-row"><span>Subtotal</span><span>₹${subtotal}</span></div>
+      <div class="nx-summary-row"><span>Delivery</span><span>${delivery===0?"FREE":"₹99"}</span></div>
+      ${delivery>0?`<div class="nx-free-note">Add ₹${999-subtotal} more to unlock FREE delivery.</div>`:"<div class="nx-free-note">🎉 You unlocked FREE delivery.</div>"}
+      <div class="nx-summary-row total"><span>Total</span><strong>₹${total}</strong></div>
+      <button class="nx-checkout-btn" onclick="openCheckout()">PROCEED TO CHECKOUT</button>
+      <button class="nx-continue-btn" onclick="closeBag();openShop()">CONTINUE SHOPPING</button>
+    </div>`;
+}
+
+
+let checkoutCoupon=false;
+
+
+function openOrders(){
+  document.getElementById("nxOrdersPage").classList.add("open");
+  renderOrders();
+}
+
+function closeOrders(){
+  document.getElementById("nxOrdersPage").classList.remove("open");
+}
+
+async function getOrders(){
+  const local=JSON.parse(localStorage.getItem("novalex_orders")||"[]");
+  const profile=JSON.parse(localStorage.getItem("novalex_profile")||"{}");
+
+  if(!profile.phone){
+    return local;
+  }
+
+  try{
+    const result=await fetch(
+      "/api/orders?phone="+encodeURIComponent(profile.phone)
+    ).then(r=>r.json());
+
+    if(result.success && Array.isArray(result.orders)){
+      const serverOrders=result.orders.map(o=>({
+        id:"NX"+o.id,
+        backendId:o.id,
+        date:o.date||new Date().toLocaleString(),
+        items:o.items||[],
+        total:Number(o.total||0),
+        payment:(o.payment||"COD").toLowerCase(),
+        status:o.status||"Pending",
+        customer:{
+          name:o.name||profile.name||"",
+          phone:o.phone||profile.phone||"",
+          address:o.address||""
+        }
+      }));
+
+      localStorage.setItem(
+        "novalex_orders",
+        JSON.stringify(serverOrders)
+      );
+
+      return serverOrders;
+    }
+  }catch(e){
+    console.log("Orders backend sync:",e);
+  }
+
+  return local;
+}
+async function renderOrders(){
+  const el = document.getElementById("nxOrdersContent");
+  if(!el) return;
+
+  el.innerHTML = `
+    <div style="text-align:center;padding:45px 20px;color:#888">
+      <div style="font-size:28px;margin-bottom:10px">⟳</div>
+      <span>Loading your orders...</span>
+    </div>`;
+
+  const orders = await getOrders();
+
+  if(!orders.length){
+    el.innerHTML = `
+      <div class="nx-empty-orders">
+        <div style="font-size:46px;margin-bottom:12px">📦</div>
+        <b>No orders yet</b>
+        <span>Your NovaLex orders will appear here.</span>
+        <button class="nx-back-orders" onclick="closeOrders();openShop()">
+          START SHOPPING
+        </button>
+      </div>`;
+    return;
+  }
+
+  el.innerHTML = orders.map(o => {
+    const status = o.status || "Pending";
+
+    return `
+      <div class="nx-order-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+          <div>
+            <b>Order #${o.id}</b>
+            <div style="font-size:12px;color:#888;margin-top:4px">
+              ${o.date || ""}
+            </div>
+          </div>
+          <span style="
+            padding:6px 10px;
+            border-radius:20px;
+            background:#f3e7bd;
+            color:#111;
+            font-size:12px;
+            font-weight:700">
+            ${status}
+          </span>
+        </div>
+
+        <div style="margin-top:14px">
+          ${(o.items || []).map(item => `
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              padding:8px 0;
+              border-bottom:1px solid #eee">
+              <span>${item.name || "Product"} × ${item.qty || 1}</span>
+              <b>₹${Number(item.price || 0) * Number(item.qty || 1)}</b>
+            </div>
+          `).join("")}
+        </div>
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          margin-top:14px;
+          font-size:15px">
+          <span>Total</span>
+          <b>₹${o.total || 0}</b>
+        </div>
+
+        <button
+          onclick="trackOrder(${o.id})"
+          style="
+            width:100%;
+            margin-top:14px;
+            padding:12px;
+            border:0;
+            border-radius:10px;
+            background:#111;
+            color:#fff;
+            font-weight:700">
+          TRACK ORDER
+        </button>
+      </div>
+    `;
+  }).join("");
+}
+async function trackOrder(id){
+  id=Number(id);
+
+  const orders=await getOrders();
+  const order=orders.find(x=>Number(x.id)===id);
+  if(!order)return;
+
+  const content=document.getElementById("nxOrdersContent");
+  if(!content)return;
+
+  const status=order.status || "Pending";
+  const steps=["Pending","Confirmed","Shipped","Delivered"];
+  const currentIndex=steps.indexOf(status);
+
+  const stepHTML=[
+    ["Order Placed","Your order has been received."],
+    ["Confirmed","NovaLex has confirmed your order."],
+    ["Shipped","Your package is on the way."],
+    ["Delivered","Your order has been delivered."]
+  ].map((step,i)=>`
+    <div class="nx-track-step ${i<=currentIndex ? "active" : ""}">
+      <b>${step[0]}</b>
+      <span>${step[1]}</span>
+    </div>
+  `).join("");
+
+  content.innerHTML=`
+    <div class="nx-track-card">
+      <div class="nx-track-head">
+        <b>Track Order</b>
+        <span>#${order.id}</span>
+      </div>
+
+      <div style="margin:14px 0;padding:12px;border-radius:10px;background:#f7f3e8">
+        <b>Current Status:</b> ${status}
+      </div>
+
+      <div class="nx-track-line">
+        ${stepHTML}
+      </div>
+
+      <button class="nx-back-orders" onclick="renderOrders()">
+        ← BACK TO ORDERS
+      </button>
+    </div>`;
+}
+
+async function syncProfileFromBackend(){
+  try{
+    const local=JSON.parse(localStorage.getItem("novalex_profile")||"{}");
+
+    if(!local.phone || !window.novaBackend) return;
+
+    const remote=await window.novaBackend.getProfile(local.phone);
+
+    if(remote && remote.success && remote.profile){
+      const merged={
+        ...local,
+        ...remote.profile,
+        phone:remote.profile.phone || local.phone
+      };
+
+      localStorage.setItem(
+        "novalex_profile",
+        JSON.stringify(merged)
+      );
+    }
+  }catch(e){
+    console.log("Profile backend sync:",e);
+  }
+}
+
+let wishlist=JSON.parse(localStorage.getItem("novalex_wishlist")||"[]");
+
+async function saveWishlist(id){
+  id=Number(id);
+  const profile=JSON.parse(localStorage.getItem("novalex_profile")||"{}");
+
+  if(!wishlist.includes(id)){
+    wishlist.push(id);
+    localStorage.setItem("novalex_wishlist",JSON.stringify(wishlist));
+
+    if(profile.phone && window.novaBackend){
+      try{
+        await window.novaBackend.addWishlist(id);
+      }catch(e){
+        console.log("Wishlist backend sync:",e);
+      }
+    }
+
+    notify("Wishlist","Product saved to your wishlist.");
+  }else{
+    notify("Wishlist","Already saved in your wishlist.");
+  }
+}
+
+async function removeWishlist(id){
+  id=Number(id);
+  wishlist=wishlist.filter(x=>Number(x)!==id);
+  localStorage.setItem("novalex_wishlist",JSON.stringify(wishlist));
+
+  const profile=JSON.parse(localStorage.getItem("novalex_profile")||"{}");
+
+  if(profile.phone && window.novaBackend){
+    try{
+      await window.novaBackend.removeWishlist(id);
+    }catch(e){
+      console.log("Wishlist remove sync:",e);
+    }
+  }
+
+  renderWishlist();
+}
+function openWishlist(){
+  document.getElementById("nxWishlistPage").classList.add("open");
+  renderWishlist();
+}
+
+function closeWishlist(){
+  document.getElementById("nxWishlistPage").classList.remove("open");
+}
+
+function renderWishlist(){
+  const el=document.getElementById("nxWishlistContent");
+  if(!el)return;
+
+  const list=products.filter(p=>wishlist.includes(p.id));
+
+  if(!list.length){
+    el.innerHTML=`
+      <div class="nx-empty-orders">
+        <div style="font-size:46px;margin-bottom:12px">♡</div>
+        <b>Your wishlist is empty</b>
+        <span>Save products you love and find them here.</span>
+        <button class="nx-back-orders" onclick="closeWishlist();openShop()">EXPLORE PRODUCTS</button>
+      </div>`;
+    return;
+  }
+
+  el.innerHTML=`
+    <div class="nx-wish-grid">
+      ${list.map(p=>`
+        <article class="nx-wish-card">
+          <button class="nx-wish-remove" onclick="removeWishlist(${p.id})">×</button>
+          <img src="${p.image}" alt="${p.name}" onclick="openProduct(${p.id})">
+          <div class="nx-wish-info">
+            <div class="nx-wish-name">${p.name}</div>
+            <div class="nx-wish-price">₹${p.price}</div>
+            <button class="nx-wish-open" onclick="openProduct(${p.id})">VIEW PRODUCT</button>
+          </div>
+        </article>
+      `).join("")}
+    </div>`;
+}
+
+function openProfile(){
+  document.getElementById("nxProfilePage").classList.add("open");
+  renderProfile();
+}
+
+function closeProfile(){
+  document.getElementById("nxProfilePage").classList.remove("open");
+}
+
+function renderProfile(){
+  const el=document.getElementById("nxProfileContent");
+  if(!el)return;
+
+  const profile=JSON.parse(localStorage.getItem("novalex_profile")||"{}");
+  const name=profile.name||"NovaLex Customer";
+
+  el.innerHTML=`
+    <div class="nx-profile-hero">
+      <div class="nx-profile-avatar">${name.charAt(0).toUpperCase()}</div>
+      <h2>${name}</h2>
+      <p>${profile.phone||"Your NovaLex account"}</p>
+    </div>
+
+    <div class="nx-profile-menu">
+      <button class="nx-profile-row" onclick="openOrders();closeProfile()">
+        <div class="ico">📦</div><div><b>My Orders</b><span>View and track your orders</span></div><div class="arrow">›</div>
+      </button>
+      <button class="nx-profile-row" onclick="openWishlist();closeProfile()">
+        <div class="ico">♡</div><div><b>Wishlist</b><span>Your saved products</span></div><div class="arrow">›</div>
+      </button>
+      <button class="nx-profile-row" onclick="toggleProfileForm()">
+        <div class="ico">✎</div><div><b>Account Details</b><span>Edit your basic information</span></div><div class="arrow">›</div>
+      </button>
+      <button class="nx-profile-row" onclick="notify('Support','NovaLex support is available for your orders.')">
+        <div class="ico">?</div><div><b>Help & Support</b><span>Get help with NovaLex</span></div><div class="arrow">›</div>
+      </button>
+    </div>
+
+    <div class="nx-profile-form" id="nxProfileForm">
+      <label style="font-size:11px;color:#999">Name</label>
+      <input class="nx-profile-input" id="nxProfileName" value="${profile.name||""}" placeholder="Your name">
+      <label style="font-size:11px;color:#999">Mobile</label>
+      <input class="nx-profile-input" id="nxProfilePhone" value="${profile.phone||""}" placeholder="Mobile number">
+      <button class="nx-profile-save" onclick="saveProfile()">SAVE CHANGES</button>
+    </div>`;
+}
+
+function toggleProfileForm(){
+  const el=document.getElementById("nxProfileForm");
+  if(el)el.classList.toggle("open");
+}
+
+async function saveProfile(){
+  const name=document.getElementById("nxProfileName")?.value.trim();
+  const phone=document.getElementById("nxProfilePhone")?.value.trim();
+
+  if(!name || !phone){
+    notify("Missing Details","Name and mobile number are required.");
+    return;
+  }
+
+  if(!/^[0-9]{10}$/.test(phone)){
+    notify("Invalid Mobile","Enter a valid 10-digit mobile number.");
+    return;
+  }
+
+  const oldProfile=JSON.parse(localStorage.getItem("novalex_profile")||"{}");
+  const profile={
+    name:name,
+    phone:phone,
+    address:oldProfile.address||""
+  };
+
+  try{
+    if(window.novaBackend && typeof window.novaBackend.saveProfile==="function"){
+      await window.novaBackend.saveProfile(profile);
+    }else{
+      const response=await fetch("/api/profile",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(profile)
+      });
+
+      const result=await response.json();
+
+      if(!response.ok || result.success===false){
+        throw new Error(result.message||"Profile save failed.");
+      }
+    }
+
+    localStorage.setItem("novalex_profile",JSON.stringify(profile));
+
+    notify("Profile Saved ✓","Your account details have been updated.");
+    renderProfile();
+
+  }catch(error){
+    console.error("Profile sync error:",error);
+    notify("Save Failed",error.message||"Unable to save profile.");
+  }
+}
+function openCheckout(){
+  if(!bag.length){
+    notify("Your Bag","Add a product before checkout.");
+    return;
+  }
+  document.getElementById("nxCheckoutPage").classList.add("open");
+  renderCheckout();
+}
+
+function closeCheckout(){
+  document.getElementById("nxCheckoutPage").classList.remove("open");
+}
+
+function applyCoupon(){
+  const input=document.getElementById("nxCoupon");
+  if(input && input.value.trim().toUpperCase()==="NOVA10"){
+    checkoutCoupon=true;
+    notify("Coupon Applied","NOVA10 has been applied.");
+  }else{
+    checkoutCoupon=false;
+    notify("Invalid Coupon","Please enter a valid NovaLex coupon.");
+  }
+  renderCheckout();
+}
+
+function renderCheckout(){
+  const el=document.getElementById("nxCheckoutContent");
+  if(!el)return;
+
+  const subtotal=bag.reduce((sum,x)=>sum+(x.price*x.qty),0);
+  const delivery=subtotal>=999?0:99;
+  const discount=checkoutCoupon?Math.round(subtotal*0.10):0;
+  const total=Math.max(0,subtotal+delivery-discount);
+
+  el.innerHTML=`
+    <div class="nx-co-card">
+      <div class="nx-co-title">📍 Delivery Address</div>
+
+      <label class="nx-co-label">Full Name</label>
+      <input class="nx-co-input" id="nxName" placeholder="Enter your name">
+
+      <label class="nx-co-label">Mobile Number</label>
+      <input class="nx-co-input" id="nxPhone" type="tel" maxlength="10" placeholder="10-digit mobile number">
+
+      <label class="nx-co-label">Address</label>
+      <textarea class="nx-co-textarea" id="nxAddress" placeholder="House no., street, area"></textarea>
+
+      <div class="nx-co-grid">
+        <div>
+          <label class="nx-co-label">City</label>
+          <input class="nx-co-input" id="nxCity" placeholder="City">
+        </div>
+        <div>
+          <label class="nx-co-label">PIN Code</label>
+          <input class="nx-co-input" id="nxPin" type="tel" maxlength="6" placeholder="PIN">
+        </div>
+      </div>
+    </div>
+
+    <div class="nx-co-card">
+      <div class="nx-co-title">💳 Payment Method</div>
+
+      <label class="nx-payment">
+        <input type="radio" name="nxPayment" value="cod" checked>
+        <div><b>Cash on Delivery</b><span>Pay when your order arrives</span></div>
+      </label>
+
+      <label class="nx-payment">
+        <input type="radio" name="nxPayment" value="online">
+        <div><b>Online Payment</b><span>Secure payment option</span></div>
+      </label>
+    </div>
+
+    <div class="nx-co-card">
+      <div class="nx-co-title">🎟️ Coupon</div>
+      <div class="nx-coupon">
+        <input class="nx-co-input" id="nxCoupon" value="${checkoutCoupon?"NOVA10":""}" placeholder="Enter coupon code">
+        <button onclick="applyCoupon()">APPLY</button>
+      </div>
+      ${checkoutCoupon?'<div class="nx-applied">✓ NOVA10 applied — 10% discount</div>':""}
+    </div>
+
+    <div class="nx-co-card">
+      <div class="nx-co-title">Order Summary</div>
+      ${bag.map(x=>`
+        <div class="nx-co-row">
+          <span>${x.name} × ${x.qty}</span>
+          <span>₹${x.price*x.qty}</span>
+        </div>
+      `).join("")}
+      <div class="nx-co-row"><span>Subtotal</span><span>₹${subtotal}</span></div>
+      <div class="nx-co-row"><span>Delivery</span><span>${delivery?"₹99":"FREE"}</span></div>
+      ${discount?`<div class="nx-co-row"><span>Coupon Discount</span><span>-₹${discount}</span></div>`:""}
+      <div class="nx-co-row total"><span>Total</span><strong>₹${total}</strong></div>
+
+      <button class="nx-place-order" onclick="placeNovaOrder(${total})">PLACE ORDER • ₹${total}</button>
+      <div class="nx-secure">🔒 Secure checkout • NovaLex</div>
+    </div>
+  `;
+}
+
+async function placeNovaOrder(total){
+  const name=document.getElementById("nxName")?.value.trim();
+  const phone=document.getElementById("nxPhone")?.value.trim();
+  const address=document.getElementById("nxAddress")?.value.trim();
+  const city=document.getElementById("nxCity")?.value.trim();
+  const pin=document.getElementById("nxPin")?.value.trim();
+  const payment=document.querySelector('input[name="nxPayment"]:checked')?.value||"cod";
+
+  if(!name||!phone||!address||!city||!pin){
+    notify("Missing Details","Please complete your delivery address.");
+    return;
+  }
+
+  if(!/^[0-9]{10}$/.test(phone)){
+    notify("Invalid Mobile","Enter a valid 10-digit mobile number.");
+    return;
+  }
+
+  if(!/^[0-9]{6}$/.test(pin)){
+    notify("Invalid PIN","Enter a valid 6-digit PIN code.");
+    return;
+  }
+
+  if(!bag.length){
+    notify("Your Bag","Your bag is empty.");
+    return;
+  }
+
+  const button=document.querySelector(".nx-place-order");
+  if(button){
+    button.disabled=true;
+    button.textContent="PLACING ORDER...";
+    button.style.opacity=".65";
+  }
+
+  const serverOrder={
+    name:name,
+    phone:phone,
+    address:address+", "+city+" - "+pin,
+    payment:payment.toUpperCase(),
+    items:JSON.parse(JSON.stringify(bag)),
+    total:Number(total)
+  };
+
+  try{
+    let result;
+
+    if(window.novaBackend && typeof window.novaBackend.createOrder==="function"){
+      result=await window.novaBackend.createOrder(serverOrder);
+    }else{
+      const response=await fetch("/api/order",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(serverOrder)
+      });
+
+      result=await response.json();
+
+      if(!response.ok || result.success===false){
+        throw new Error(result.message||"Unable to place order.");
+      }
+    }
+
+    const backendId=result?.order?.id;
+
+    const order={
+      id:backendId ? "NX"+backendId : "NX"+Date.now().toString().slice(-8),
+      backendId:backendId||null,
+      date:new Date().toLocaleString(),
+      items:JSON.parse(JSON.stringify(bag)),
+      total:Number(total),
+      payment:payment,
+      status:"Order Placed",
+      customer:{name,phone,address,city,pin}
+    };
+
+    let orders=JSON.parse(localStorage.getItem("novalex_orders")||"[]");
+    orders.unshift(order);
+    localStorage.setItem("novalex_orders",JSON.stringify(orders));
+
+    const profile={name:name,phone:phone,address:address+", "+city+" - "+pin};
+    localStorage.setItem("novalex_profile",JSON.stringify(profile));
+
+    if(window.novaBackend && typeof window.novaBackend.saveProfile==="function"){
+      try{
+        await window.novaBackend.saveProfile(profile);
+      }catch(profileError){
+        console.log("Profile sync skipped:",profileError);
+      }
+    }
+
+    bag=[];
+    localStorage.setItem("novalex_bag","[]");
+    updateBagCount();
+
+    document.getElementById("nxCheckoutPage").classList.remove("open");
+
+    notify(
+      "Order Placed ✓",
+      "Order "+order.id+" has been placed successfully."
+    );
+
+    setTimeout(()=>{
+      if(typeof openOrders==="function") openOrders();
+    },700);
+
+  }catch(error){
+    console.error("NovaLex order error:",error);
+
+    notify(
+      "Order Not Placed",
+      error.message || "Please try again."
+    );
+
+    if(button){
+      button.disabled=false;
+      button.textContent="PLACE ORDER • ₹"+total;
+      button.style.opacity="";
+    }
+  }
+}
+
+function updateBagCount(){
+ const count=bag.reduce((sum,x)=>sum+(x.qty||1),0);
+ document.querySelectorAll(".bag-count,.bag-badge,[data-bag-count]").forEach(el=>el.textContent=count);
+}
+
+function openShop(){
+ document.getElementById("nxShopPage").classList.add("open");
+ renderShop();
+}
+
+function closeShop(){
+ document.getElementById("nxShopPage").classList.remove("open");
+}
+
+function setCategory(category,btn){
+ shopCategory=category;
+
+ document.querySelectorAll(".nx-cat").forEach(x=>x.classList.remove("active"));
+ if(btn)btn.classList.add("active");
+
+ renderShop();
+}
+
+function filterShop(value){
+ shopSearch=value.toLowerCase().trim();
+ renderShop();
+}
+
+function sortShop(type){
+ shopSort=type;
+ renderShop();
+}
+
+function renderShop(){
+
+ let list=products.slice();
+
+ if(shopCategory!=="All"){
+   if(shopCategory==="Custom"){
+     list=list.filter(p=>p.category==="T-Shirts");
+   }else{
+     list=list.filter(p=>p.category===shopCategory);
+   }
+ }
+
+ if(shopSearch){
+   list=list.filter(p=>
+     p.name.toLowerCase().includes(shopSearch) ||
+     p.category.toLowerCase().includes(shopSearch)
+   );
+ }
+
+ if(shopSort==="price"){
+   list.sort((a,b)=>a.price-b.price);
+ }else if(shopSort==="name"){
+   list.sort((a,b)=>a.name.localeCompare(b.name));
+ }
+
+ const count=document.getElementById("nxResultCount");
+ if(count)count.textContent=list.length+" product"+(list.length===1?"":"s");
+
+ const el=document.getElementById("nxShopGrid");
+
+ if(!list.length){
+   el.innerHTML=
+    '<div class="nx-empty"><b>No products found</b>'+
+    'Try another search or category.</div>';
+   return;
+ }
+
+ el.innerHTML=list.map(p=>`
+ <article class="nx-shop-product">
+   <button class="nx-shop-wish"
+           onclick="notify('Wishlist','${p.name} saved.')">
+     <svg viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.8">
+       <path d="M20.8 8.6c0 5-8.8 10.2-8.8 10.2S3.2 13.6 3.2 8.6A5 5 0 0 1 12 5.3a5 5 0 0 1 8.8 3.3Z"></path>
+     </svg>
+   </button>
+
+   <img class="nx-shop-product-img"
+        src="${p.image}"
+        alt="${p.name}"
+        onclick="openProduct(${p.id})">
+
+   <div class="nx-shop-info">
+     <div class="nx-shop-name">${p.name}</div>
+
+     <div class="nx-shop-rating">
+       <b>★ ${p.rating}</b> · Premium Quality
+     </div>
+
+     <div class="nx-shop-price">
+       <strong>₹${p.price}</strong>
+       <del>₹${p.old}</del>
+     </div>
+
+     <button class="nx-view-product"
+             onclick="openProduct(${p.id})">
+       VIEW PRODUCT
+     </button>
+   </div>
+ </article>
+ `).join("");
+}
+
+let selectedSize="M";
+let selectedQty=1;
+
+function openProduct(id){
+ const p=products.find(x=>x.id===id);
+ if(!p)return;
+
+ selectedQty=1;
+ selectedSize=(p.category==="Caps" ? "One Size" : "M");
+
+ const related=products.filter(x=>x.id!==p.id).slice(0,4);
+
+ document.getElementById("nxProductContent").innerHTML=`
+ <div class="nx-product-wrap">
+   <div class="nx-product-image-box">
+     <img class="nx-product-main-img" src="${p.image}" alt="${p.name}">
+     <button class="nx-product-wish" onclick="saveWishlist(${p.id})">
+       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M20.8 8.6c0 5-8.8 10.2-8.8 10.2S3.2 13.6 3.2 8.6A5 5 0 0 1 12 5.3a5 5 0 0 1 8.8 3.3Z"></path>
+       </svg>
+     </button>
+   </div>
+
+   <div class="nx-product-body">
+     <div class="nx-product-category">${p.category}</div>
+     <h1 class="nx-product-title">${p.name}</h1>
+
+     <div class="nx-product-rating">
+       <b>★ ${p.rating}</b><span>Premium Quality</span>
+     </div>
+
+     <div class="nx-product-price-row">
+       <strong class="nx-product-price">₹${p.price}</strong>
+       <span class="nx-product-old">₹${p.old}</span>
+       <span class="nx-product-save">${Math.round((1-p.price/p.old)*100)}% OFF</span>
+     </div>
+
+     <div class="nx-product-line"></div>
+
+     ${p.category!=="Caps" ? `
+     <div class="nx-detail-label">Select Size</div>
+     <div class="nx-size-row">
+       ${["S","M","L","XL","XXL"].map(x=>`
+       <button class="nx-size ${x===selectedSize?"active":""}" onclick="selectSize('${x}',this)">${x}</button>
+       `).join("")}
+     </div>
+     ` : `
+     <div class="nx-detail-label">Size</div>
+     <div class="nx-size-row"><button class="nx-size active">One Size</button></div>
+     `}
+
+     <div class="nx-product-line"></div>
+
+     <div class="nx-detail-label">Quantity</div>
+     <div class="nx-qty">
+       <button onclick="changeQty(-1)">−</button>
+       <span id="nxQty">1</span>
+       <button onclick="changeQty(1)">+</button>
+     </div>
+
+     <div class="nx-product-line"></div>
+
+     <div class="nx-offer">
+       <b>🏷 NOVA10 — Extra savings available</b>
+       <span>Apply your available NovaLex offer at checkout.</span>
+     </div>
+
+     <div class="nx-offer">
+       <b>🚚 Free delivery on orders ₹999+</b>
+       <span>Fast and reliable shipping across eligible locations.</span>
+     </div>
+
+     <div class="nx-delivery">
+       <div class="nx-delivery-icon">✓</div>
+       <div><b>NovaLex Quality Promise</b><span>Premium apparel, secure checkout and support.</span></div>
+     </div>
+
+     <div class="nx-product-actions">
+       <button class="nx-action nx-add" onclick="addProductToBag(${p.id})">ADD TO BAG</button>
+       <button class="nx-action nx-buy" onclick="buyProductNow(${p.id})">BUY NOW</button>
+     </div>
+
+     <div class="nx-related-title">You may also like</div>
+     <div class="nx-related">
+       ${related.map(x=>`
+       <article class="nx-related-card" onclick="openProduct(${x.id})">
+         <img src="${x.image}" alt="${x.name}">
+         <div>${x.name}<br><span style="color:#d8b34d">₹${x.price}</span></div>
+       </article>
+       `).join("")}
+     </div>
+   </div>
+ </div>`;
+
+ document.getElementById("nxProductPage").classList.add("open");
+}
+
+function closeProduct(){
+ document.getElementById("nxProductPage").classList.remove("open");
+}
+
+function selectSize(size,btn){
+ selectedSize=size;
+ document.querySelectorAll("#nxProductContent .nx-size").forEach(x=>x.classList.remove("active"));
+ btn.classList.add("active");
+}
+
+function changeQty(amount){
+ selectedQty=Math.max(1,Math.min(10,selectedQty+amount));
+ const el=document.getElementById("nxQty");
+ if(el)el.textContent=selectedQty;
+}
+
+function addProductToBag(id){
+ const p=products.find(x=>x.id===id);
+ if(!p)return;
+
+ const key=id+"-"+selectedSize;
+ const existing=bag.find(x=>x.key===key);
+
+ if(existing){
+   existing.qty+=selectedQty;
+ }else{
+   bag.push({
+     key:key,id:p.id,name:p.name,price:p.price,image:p.image,
+     size:selectedSize,qty:selectedQty
+   });
+ }
+
+ localStorage.setItem("novalex_bag",JSON.stringify(bag));
+ updateBagCount();
+ notify("Added to Bag",p.name+" added successfully.");
+}
+
+function buyProductNow(id){
+ addProductToBag(id);
+ setTimeout(()=>notify("Checkout","Your product is ready for checkout."),250);
+}
+
+function saveWishlist(id){
+ const p=products.find(x=>x.id===id);
+ if(p)notify("Wishlist",p.name+" saved.");
+}
+
+function renderProducts(list=products){
+ const el=document.getElementById("products");
+ el.innerHTML=list.map(p=>`
+ <article class="product">
+ <button class="wish" onclick="notify('Wishlist','${p.name} saved.')">
+ <svg viewBox="0 0 24 24"><path d="M20.8 8.6c0 5-8.8 10.2-8.8 10.2S3.2 13.6 3.2 8.6A5 5 0 0 1 12 5.3a5 5 0 0 1 8.8 3.3Z"></path></svg>
+ </button>
+ <img class="product-img" src="${p.image}" alt="${p.name}">
+ <div class="product-info">
+ <div class="product-name">${p.name}</div>
+ <div class="rating"><b>★ ${p.rating}</b> • Premium Quality</div>
+ <div class="price"><strong>₹${p.price}</strong><del>₹${p.old}</del></div>
+ <button class="add" onclick="addToBag(${p.id})">ADD TO BAG</button>
+ </div>
+ </article>`).join("");
+}
+
+function addToBag(id){
+ bag.push(id);
+ localStorage.setItem("novalex_bag",JSON.stringify(bag));
+ document.getElementById("bagCount").textContent=bag.length;
+ notify("Added to Bag","Product added successfully.");
+}
+
+function searchProducts(q){
+ q=q.toLowerCase().trim();
+ renderProducts(q?products.filter(p=>p.name.toLowerCase().includes(q)):products);
+}
+
+function focusSearch(){
+ document.getElementById("search").focus();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function shopNow(){
+ openShop();
+}
+
+function openDrawer(){
+ document.getElementById("drawer").classList.add("open");
+}
+function closeDrawer(e){
+ if(e.target.id==="drawer")document.getElementById("drawer").classList.remove("open");
+}
+
+function notify(title,text){
+ const old=document.getElementById("nxAlert");
+ if(old)old.remove();
+ const box=document.createElement("div");
+ box.id="nxAlert";
+ box.style.cssText=`
+ position:fixed;right:14px;bottom:82px;z-index:9999;
+ width:min(355px,calc(100vw - 28px));padding:14px;
+ display:flex;gap:11px;align-items:center;color:#fff;
+ background:linear-gradient(135deg,#18191d,#070708);
+ border:1px solid rgba(215,184,102,.55);border-radius:17px;
+ box-shadow:0 18px 55px rgba(0,0,0,.5);
+ animation:nxIn .4s ease both`;
+ box.innerHTML=`
+ <img src="static/images/novalex-logo.png"
+ style="width:42px;height:42px;border-radius:11px;object-fit:contain;background:#fff">
+ <div style="flex:1">
+ <div style="font-size:12px;font-weight:900;letter-spacing:.5px">${title}</div>
+ <div style="font-size:11px;color:#aaa;margin-top:4px;line-height:1.4">${text}</div>
+ </div>
+ <button onclick="this.parentElement.remove()" style="background:none;border:0;color:#aaa;font-size:20px">×</button>`;
+ document.body.appendChild(box);
+ setTimeout(()=>{if(box.parentNode)box.remove()},5000);
+}
+
+const st=document.createElement("style");
+st.textContent="@keyframes nxIn{from{opacity:0;transform:translateY(25px) scale(.95)}to{opacity:1;transform:none}}";
+document.head.appendChild(st);
+
+renderProducts();
+renderShop();
+document.getElementById("bagCount").textContent=bag.length;
+
+setTimeout(()=>{
+ notify("WELCOME TO NOVALEX","Premium custom apparel. Define your style.");
+},1800);
+</script>
+
+</body>
+</html>
+
+<script>
+/* NOVALEX BACKEND SYNC */
+(function(){
+  const API_BASE = "";
+  const PROFILE_KEY = "novalex_profile";
+
+  function getProfile(){
+    try { return JSON.parse(localStorage.getItem(PROFILE_KEY) || "{}"); }
+    catch(e){ return {}; }
+  }
+
+  function saveProfileLocal(p){
+    localStorage.setItem(PROFILE_KEY, JSON.stringify(p || {}));
+  }
+
+  async function novaApi(path, options={}){
+    const res = await fetch(API_BASE + path, {
+      headers: {"Content-Type":"application/json", ...(options.headers||{})},
+      ...options
+    });
+    const data = await res.json().catch(()=>({success:false,message:"Invalid server response"}));
+    if(!res.ok || data.success === false) throw new Error(data.message || "Server error");
+    return data;
+  }
+
+  window.novaBackend = {
+    async saveProfile(profile){
+      const data = await novaApi("/api/profile", {
+        method:"POST",
+        body:JSON.stringify(profile)
+      });
+      saveProfileLocal(profile);
+      return data;
+    },
+
+    async getProfile(phone){
+      return novaApi("/api/profile?phone=" + encodeURIComponent(phone));
+    },
+
+    async addWishlist(productId){
+      const p = getProfile();
+      if(!p.phone) return null;
+      return novaApi("/api/wishlist", {
+        method:"POST",
+        body:JSON.stringify({
+          phone:p.phone,
+          product_id:Number(productId)
+        })
+      });
+    },
+
+    async getWishlist(){
+      const p = getProfile();
+      if(!p.phone) return {success:true,products:[]};
+      return novaApi("/api/wishlist?phone=" + encodeURIComponent(p.phone));
+    },
+
+    async removeWishlist(productId){
+      const p = getProfile();
+      if(!p.phone) return null;
+      return novaApi("/api/wishlist/" + Number(productId) +
+        "?phone=" + encodeURIComponent(p.phone), {
+          method:"DELETE"
+        });
+    },
+
+    async createOrder(order){
+      return novaApi("/api/order", {
+        method:"POST",
+        body:JSON.stringify(order)
+      });
+    }
+  };
+
+  console.log("NovaLex backend sync loaded");
+})();
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  syncProfileFromBackend();
+});
+</script>
