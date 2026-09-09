@@ -1063,6 +1063,36 @@ button:active,.nx-btn:active,.btn:active{transform:scale(.97)}
  .nx-ai-panel{bottom:148px}
 }
 </style>
+
+<style id="novalex-ai-v2">
+.nx-ai-v2-card{
+ margin-top:12px;padding:12px;border-radius:18px;
+ background:linear-gradient(135deg,#171717,#0b0b0b);
+ border:1px solid rgba(215,180,106,.18);
+}
+.nx-ai-v2-label{
+ font-size:10px;text-transform:uppercase;letter-spacing:1.4px;
+ color:#d7b46a;font-weight:800;margin-bottom:6px;
+}
+.nx-ai-v2-text{font-size:12px;line-height:1.55;color:#d5d5d5}
+.nx-ai-v2-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.nx-ai-v2-actions button{
+ border:1px solid rgba(255,255,255,.08);background:#151515;
+ color:#eee;border-radius:14px;padding:10px;font-size:11px;font-weight:700;
+}
+.nx-ai-v2-actions button:active{transform:scale(.97)}
+.nx-ai-reco{
+ display:flex;gap:9px;align-items:center;margin-top:10px;
+ padding:9px;border-radius:14px;background:#121212;
+ border:1px solid rgba(255,255,255,.06);
+}
+.nx-ai-reco img{
+ width:48px;height:48px;object-fit:cover;border-radius:11px;
+ background:#1b1b1b;
+}
+.nx-ai-reco b{font-size:12px;display:block}
+.nx-ai-reco span{font-size:10px;color:#999}
+</style>
 </head>
 
 <body>
@@ -2583,6 +2613,89 @@ document.addEventListener("DOMContentLoaded",function(){
  const meta=document.createElement("meta");
  meta.name="theme-color";meta.content="#070707";
  document.head.appendChild(meta);
+})();
+</script>
+
+<script id="novalex-ai-v2-script">
+(function(){
+ if(document.getElementById("nxAIV2")) return;
+
+ const panel=document.getElementById("nxAIPanel");
+ if(!panel) return;
+
+ const box=document.createElement("div");
+ box.id="nxAIV2";
+ box.innerHTML=`
+   <div class="nx-ai-v2-card">
+     <div class="nx-ai-v2-label">NOVALEX AI • Smart Shopping</div>
+     <div class="nx-ai-v2-text" id="nxAIV2Text">
+       Tell me what you want to create, wear or discover.
+     </div>
+     <div class="nx-ai-v2-actions">
+       <button data-nxai="recommend">Recommend</button>
+       <button data-nxai="print">Print Idea</button>
+       <button data-nxai="budget">Best Value</button>
+       <button data-nxai="trend">Style Idea</button>
+     </div>
+     <div id="nxAIV2Reco"></div>
+   </div>`;
+ panel.appendChild(box);
+
+ const text=document.getElementById("nxAIV2Text");
+ const reco=document.getElementById("nxAIV2Reco");
+
+ function getProducts(){
+   try{
+     return Array.isArray(window.products) ? window.products : [
+       {name:"NovaLex Classic Tee",price:799,image:"static/images/tshirt.jpg"},
+       {name:"NovaLex Oversized Tee",price:999,image:"static/images/tshirt.jpg"},
+       {name:"NovaLex Premium Hoodie",price:1499,image:"static/images/hoodie.jpg"},
+       {name:"NovaLex Street Cap",price:499,image:"static/images/cap.jpg"}
+     ];
+   }catch(e){return []}
+ }
+
+ function showProduct(item,reason){
+   if(!item){reco.innerHTML="";return}
+   reco.innerHTML=`
+    <div class="nx-ai-reco">
+      <img src="${item.image||"static/images/tshirt.jpg"}" alt="">
+      <div>
+        <b>${item.name}</b>
+        <span>₹${item.price} • ${reason}</span>
+      </div>
+    </div>`;
+ }
+
+ box.querySelectorAll("[data-nxai]").forEach(btn=>{
+   btn.addEventListener("click",()=>{
+     const ps=getProducts();
+     const mode=btn.dataset.nxai;
+
+     if(mode==="recommend"){
+       const item=ps.find(x=>/oversized/i.test(x.name))||ps[0];
+       text.textContent="For a clean premium streetwear direction, I'd start with an oversized tee and keep the rest minimal.";
+       showProduct(item,"AI pick");
+     }
+
+     if(mode==="print"){
+       text.textContent="Custom concept: minimal front mark + an original geometric back graphic with strong negative space. Clean, distinctive and print-friendly.";
+       reco.innerHTML="";
+     }
+
+     if(mode==="budget"){
+       const item=[...ps].sort((a,b)=>(a.price||0)-(b.price||0))[0];
+       text.textContent="Looking for value? Here is the lowest-priced current NovaLex option.";
+       showProduct(item,"best value");
+     }
+
+     if(mode==="trend"){
+       const item=ps.find(x=>/hoodie/i.test(x.name))||ps[0];
+       text.textContent="Style direction: monochrome base, one statement piece, subtle branding and clean proportions.";
+       showProduct(item,"style idea");
+     }
+   });
+ });
 })();
 </script>
 </body>
